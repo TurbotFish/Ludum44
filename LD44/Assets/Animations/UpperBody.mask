@@ -26,7 +26,7 @@ AvatarMask:
   - m_Path: Chara_Pelvis/Chara_Body/Chara_ArmR/Chara_HandR/Chara_Props
     m_Weight: 1
   - m_Path: Chara_Pelvis/Chara_Body/Chara_Head
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Chara_Pelvis/Chara_LegL
     m_Weight: 0
   - m_Path: Chara_Pelvis/Chara_LegL/Chara_FootL

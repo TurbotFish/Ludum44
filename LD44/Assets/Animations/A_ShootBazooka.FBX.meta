@@ -39,7 +39,7 @@ ModelImporter:
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
-      lastFrame: 60
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -59,9 +59,35 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Chara_Pelvis
+        weight: 0
+      - path: Chara_Pelvis/Chara_Body
+        weight: 1
+      - path: Chara_Pelvis/Chara_Body/Chara_ArmL
+        weight: 1
+      - path: Chara_Pelvis/Chara_Body/Chara_ArmL/Chara_HandL
+        weight: 1
+      - path: Chara_Pelvis/Chara_Body/Chara_ArmR
+        weight: 1
+      - path: Chara_Pelvis/Chara_Body/Chara_ArmR/Chara_HandR
+        weight: 1
+      - path: Chara_Pelvis/Chara_Body/Chara_ArmR/Chara_HandR/Chara_Props
+        weight: 1
+      - path: Chara_Pelvis/Chara_Body/Chara_Head
+        weight: 1
+      - path: Chara_Pelvis/Chara_LegL
+        weight: 0
+      - path: Chara_Pelvis/Chara_LegL/Chara_FootL
+        weight: 1
+      - path: Chara_Pelvis/Chara_LegR
+        weight: 0
+      - path: Chara_Pelvis/Chara_LegR/Chara_FootR
+        weight: 1
+      maskType: 1
+      maskSource: {fileID: 31900000, guid: 96cb7d4786d711949b7faa3f2ceb55ab, type: 2}
       additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
