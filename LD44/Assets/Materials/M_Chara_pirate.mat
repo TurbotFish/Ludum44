@@ -77,6 +77,7 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Gradient_Factor: 1
+    - _Invert_fresnel: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
