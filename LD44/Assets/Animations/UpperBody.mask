@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UpperBody
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Chara_Pelvis
+    m_Weight: 0
+  - m_Path: Chara_Pelvis/Chara_Body
+    m_Weight: 1
+  - m_Path: Chara_Pelvis/Chara_Body/Chara_ArmL
+    m_Weight: 1
+  - m_Path: Chara_Pelvis/Chara_Body/Chara_ArmL/Chara_HandL
+    m_Weight: 1
+  - m_Path: Chara_Pelvis/Chara_Body/Chara_ArmR
+    m_Weight: 1
+  - m_Path: Chara_Pelvis/Chara_Body/Chara_ArmR/Chara_HandR
+    m_Weight: 1
+  - m_Path: Chara_Pelvis/Chara_Body/Chara_ArmR/Chara_HandR/Chara_Props
+    m_Weight: 1
+  - m_Path: Chara_Pelvis/Chara_Body/Chara_Head
+    m_Weight: 1
+  - m_Path: Chara_Pelvis/Chara_LegL
+    m_Weight: 0
+  - m_Path: Chara_Pelvis/Chara_LegL/Chara_FootL
+    m_Weight: 0
+  - m_Path: Chara_Pelvis/Chara_LegR
+    m_Weight: 0
+  - m_Path: Chara_Pelvis/Chara_LegR/Chara_FootR
+    m_Weight: 0
