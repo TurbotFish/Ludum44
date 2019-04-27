@@ -631,7 +631,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 0142abe51b7dda14fabde5ff53bb7b1f, type: 2}
+      objectReference: {fileID: 2100000, guid: 71545ecab7a2603449a002d3d4a6a502, type: 2}
     - target: {fileID: -1504981713932161579, guid: 737b57fe264689842909611c178e7f03,
         type: 3}
       propertyPath: m_Materials.Array.data[2]
@@ -652,7 +652,7 @@ GameObject:
   - component: {fileID: 1570982934}
   - component: {fileID: 1570982933}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -726,7 +726,7 @@ Transform:
   m_GameObject: {fileID: 1570982932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
