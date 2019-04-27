@@ -88,16 +88,8 @@ public class VehicleController : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        if (col.collider.CompareTag("bullet"))
-        {
-            Bullet b = col.gameObject.GetComponent<Bullet>();
-            life -= b.bulletPower;
-            if (life < 0)
-            {
-                Kill(b.transform.forward * b.bulletPower, true);
-            }
-        }
-        else if (col.collider.CompareTag("bonhomme") && horizontalVelocity.magnitude > speedKillThreshold)
+
+        if (col.collider.CompareTag("bonhomme") && horizontalVelocity.magnitude > speedKillThreshold)
         {
             col.gameObject.GetComponent<BonhommeController>().Kill(rb.velocity, true);
         }
