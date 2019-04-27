@@ -30,7 +30,7 @@ public class Weapon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("bonhomme"))
+        if (other.CompareTag("bonhomme") && pickable)
         {
             pickable = false;
             other.GetComponent<BonhommeController>().PickWeapon(this.gameObject);
@@ -46,13 +46,13 @@ public class Weapon : MonoBehaviour
 
             if (type == WeaponType.Handgun)
             {
-                GameObject b = Instantiate(bullet, origin.position, origin.parent.rotation) as GameObject;
+                GameObject b = Instantiate(bullet, origin.position, origin.rotation) as GameObject;
             }
         }
 
     }
 
-    public IEnumerator FireRate()
+    private IEnumerator FireRate()
     {
         yield return new WaitForSeconds(rateOfAction);
         canFire = true;

@@ -19,14 +19,14 @@ public class Bullet : MonoBehaviour
 
     void FixedUpdate()
     {
-        this.transform.Translate(this.transform.forward * bulletSpeed * Time.fixedDeltaTime);
+        transform.Translate(0,0,bulletSpeed * Time.fixedDeltaTime);
     }
 
     private void OnCollisionEnter(Collision col)
     {
         if (col.collider.CompareTag("bonhomme"))
         {
-            col.collider.GetComponent<BonhommeController>().Kill(this.transform.forward * bulletPower);
+            col.collider.GetComponent<BonhommeController>().Kill(transform.forward * bulletPower, true);
         }
         else
         {

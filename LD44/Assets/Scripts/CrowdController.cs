@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CrowdController : MonoBehaviour
 {
-    public static float moveSpeed = 5f;
+    public static float moveSpeed = 6f;
     public static float rotationSpeed = 4f;
     //public float moveAccelerationSpeed;
 

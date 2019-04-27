@@ -216,6 +216,6 @@ MonoBehaviour:
   pickable: 1
   type: 0
   bullet: {fileID: 8963459624203665490, guid: 5b66f332e740d4135b285dad525d18b6, type: 3}
-  rateOfAction: 2
+  rateOfAction: 0.5
   canFire: 1
   continuedShot: 0
