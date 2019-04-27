@@ -27,6 +27,17 @@ public class Bullet : MonoBehaviour
         if (col.collider.CompareTag("bonhomme"))
         {
             col.collider.GetComponent<BonhommeController>().Kill(transform.forward * bulletPower, true);
+            DestroyBullet();
+
+        }
+        else if (col.collider.CompareTag("vehicle"))
+        {
+            VehicleController v = col.gameObject.GetComponent<VehicleController>();
+            v.life -= bulletPower;
+            if (v.life < 0)
+            {
+                v.Kill(transform.forward * bulletPower, true);
+            }
         }
         else
         {

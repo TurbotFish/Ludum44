@@ -6,6 +6,8 @@ TagManager:
   tags:
   - bonhomme
   - ground
+  - bullet
+  - vehicle
   layers:
   - Default
   - TransparentFX

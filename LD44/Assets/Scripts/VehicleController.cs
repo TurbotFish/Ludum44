@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VehicleController : MonoBehaviour
 {
-    public float moveSpeed, rotationSpeed;
+    public float acceleration, rotationSpeed, maxSpeed, speedKillThreshold;
     Rigidbody rb;
     public bool alive;
     public bool playerIn;
@@ -12,6 +12,7 @@ public class VehicleController : MonoBehaviour
     public BonhommeController player;
     bool canKlaxon = true;
     public float life = 1;
+    public Vector3 horizontalVelocity;
 
     void Start()
     {
@@ -36,18 +37,24 @@ public class VehicleController : MonoBehaviour
 
     void FixedUpdate()
     {
+        horizontalVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+
         if (alive && playerIn)
         {
-            Vector3 movement = this.transform.forward * CrowdController.moveInput * moveSpeed;
-            rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
-            this.transform.Rotate(new Vector3(0, CrowdController.rotationInput * rotationSpeed, 0));
+            Vector3 movement = this.transform.forward * CrowdController.moveInput * acceleration;
+            rb.AddForce(movement);
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
+            this.transform.Rotate(new Vector3(0, CrowdController.rotationInput * rotationSpeed * Mathf.Clamp01(horizontalVelocity.magnitude/ speedKillThreshold), 0));
 
         }
     }
 
     public void Kill(Vector3 deathForce, bool shake)
     {
-        player.ExitVehicle();
+        if (player != null)
+        {
+            player.ExitVehicle();
+        }
         alive = false;
         rb.constraints = RigidbodyConstraints.None;
         rb.AddForce(deathForce);
@@ -64,26 +71,11 @@ public class VehicleController : MonoBehaviour
         Debug.Log("klaxon");
     }
 
-    private void OnCollisionEnter(Collision col)
-    {
-        if (col.collider.CompareTag("bullet"))
-        {
-            Bullet b = col.gameObject.GetComponent<Bullet>();
-            life -= b.bulletPower;
-            if (life<0)
-            {
-                Kill(b.transform.forward * b.bulletPower, true);
-            }
-        }
-        else if (col.collider.CompareTag("bonhomme") && playerIn)
-        {
-            col.gameObject.GetComponent<BonhommeController>().Kill(rb.velocity, true);
-        }
-    }
+
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("bonhomme") && !playerIn)
+        if (other.CompareTag("bonhomme") && !playerIn && horizontalVelocity.magnitude<speedKillThreshold)
         {
             playerIn = true;
             player = other.GetComponent<BonhommeController>();
@@ -92,5 +84,28 @@ public class VehicleController : MonoBehaviour
             other.transform.localPosition = Vector3.zero;
             other.transform.localEulerAngles = Vector3.zero;
         }
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.collider.CompareTag("bullet"))
+        {
+            Bullet b = col.gameObject.GetComponent<Bullet>();
+            life -= b.bulletPower;
+            if (life < 0)
+            {
+                Kill(b.transform.forward * b.bulletPower, true);
+            }
+        }
+        else if (col.collider.CompareTag("bonhomme") && horizontalVelocity.magnitude > speedKillThreshold)
+        {
+            col.gameObject.GetComponent<BonhommeController>().Kill(rb.velocity, true);
+        }
+    }
+
+    public void ResetVehicle()
+    {
+        playerIn = false;
+        player = null;
     }
 }

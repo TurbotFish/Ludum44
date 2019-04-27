@@ -35,6 +35,14 @@ public class Weapon : MonoBehaviour
             pickable = false;
             other.GetComponent<BonhommeController>().PickWeapon(this.gameObject);
         }
+        else if (other.CompareTag("vehicle") && pickable)
+        {
+            pickable = false;
+            VehicleController v = other.GetComponent<VehicleController>();
+            v.player.PickWeapon(this.gameObject);
+            v.player.ExitVehicle();
+            v.ResetVehicle();
+        }
     }
 
     public void FireWeapon(Transform origin)
