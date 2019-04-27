@@ -27,6 +27,12 @@ public class Weapon : MonoBehaviour
         if (pickable)
         {
             transform.Rotate(new Vector3(0, rotationSpeed, 0));
+            canFire = true;
+            fired = false;
+        }
+        if (!CrowdController.firing)
+        {
+            fired = false;
         }
     }
 
@@ -34,7 +40,6 @@ public class Weapon : MonoBehaviour
     {
         if (other.CompareTag("bonhomme") && pickable)
         {
-            pickable = false;
             other.GetComponent<BonhommeController>().PickWeapon(this.gameObject);
         }
         else if (other.CompareTag("vehicle") && pickable)
@@ -64,11 +69,13 @@ public class Weapon : MonoBehaviour
             }
             else if (type == WeaponType.Sword)
             {
-
+                GameObject zone = Instantiate(actionZone, transform.position + transform.forward*(actionZone.GetComponent<SphereCollider>().radius+0.5f), Quaternion.identity) as GameObject;
             }
             else if (type == WeaponType.Grenade)
             {
-
+                GameObject b = Instantiate(bullet, origin.position, origin.rotation) as GameObject;
+                b.GetComponent<Rigidbody>().AddForce((Vector3.up*0.5f + b.transform.forward.normalized) * 100);
+                Debug.Log((Vector3.up + b.transform.forward));
             }
         }
 

@@ -13,6 +13,7 @@ public class VehicleController : MonoBehaviour
     bool canKlaxon = true;
     public float life = 1;
     public Vector3 horizontalVelocity;
+    public GameObject explosion;
 
     void Start()
     {
@@ -62,7 +63,13 @@ public class VehicleController : MonoBehaviour
         {
             CameraShake.shakeDuration = 0.5f;
         }
+
+        GameObject explo = Instantiate(explosion, transform.position, Quaternion.identity) as GameObject;
+        Destroy(explo, 4);
+
         Destroy(this.gameObject, 5);
+        this.gameObject.tag = "Untagged";
+
     }
 
     private IEnumerator Klaxon(float t)
@@ -92,7 +99,10 @@ public class VehicleController : MonoBehaviour
         if (col.collider.CompareTag("bonhomme") && horizontalVelocity.magnitude > speedKillThreshold)
         {
             col.gameObject.GetComponent<BonhommeController>().Kill(rb.velocity, true);
-            StartCoroutine(player.NoPick(1));
+            if (player != null)
+            {
+                StartCoroutine(player.NoPick(1));
+            }
 
         }
     }

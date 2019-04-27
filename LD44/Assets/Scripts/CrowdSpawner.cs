@@ -8,6 +8,9 @@ public class CrowdSpawner : MonoBehaviour
     public float raycastHeight;
     public  float minX,maxX, minY, maxY;
     public int numberOfPlayersToInstantiate;
+
+    public GameObject plane, fakeShadow;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +26,9 @@ public class CrowdSpawner : MonoBehaviour
         }
     }
 
-    void InstantiateCrowd(int numberOfPlayers)
+    public IEnumerator InstantiateCrowd(int numberOfPlayers)
     {
+
         int i = 0;
         int sec = 0;
         while (i<numberOfPlayers && sec < 500)
@@ -40,6 +44,7 @@ public class CrowdSpawner : MonoBehaviour
                 {
                     GameObject p = Instantiate(playerPrefab, hit.point + Vector3.up * 0.5f, Quaternion.identity) as GameObject;
                     p.transform.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
+                    yield return new WaitForSeconds(0.012f);
                     i++;
                 }
             }

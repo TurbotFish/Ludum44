@@ -6,6 +6,7 @@ public class Explosion : MonoBehaviour
 {
     public float explosionForce;
     public float explosionDamage;
+    bool exploded;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,17 +23,16 @@ public class Explosion : MonoBehaviour
     {
         SphereCollider col = GetComponent<SphereCollider>();
         Collider[] hitColliders = Physics.OverlapSphere(transform.position+col.center, col.radius);
-        int i = 0;
-        while (i < hitColliders.Length)
+        foreach (Collider hitCollider in hitColliders)
         {
-            if (hitColliders[i].CompareTag("bonhomme"))
+            if (hitCollider.CompareTag("bonhomme"))
             {
-                BonhommeController bc = hitColliders[i].GetComponent<BonhommeController>();
-                bc.Kill((bc.transform.position - (transform.position + col.center)) * explosionForce, true);
+                BonhommeController bc = hitCollider.GetComponent<BonhommeController>();
+                bc.Kill((bc.transform.position - (transform.position + col.center)).normalized * explosionForce, true);
             }
-            else if (hitColliders[i].CompareTag("vehicle"))
+            else if (hitCollider.CompareTag("vehicle"))
             {
-                VehicleController vc = hitColliders[i].GetComponent<VehicleController>();
+                VehicleController vc = hitCollider.GetComponent<VehicleController>();
                 vc.life -= explosionDamage;
                 if (vc.life < 0)
                 {
@@ -40,6 +40,7 @@ public class Explosion : MonoBehaviour
                 }
             }
         }
+       
         Destroy(this.gameObject, 5);
     }
 }

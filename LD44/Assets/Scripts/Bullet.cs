@@ -11,12 +11,13 @@ public class Bullet : MonoBehaviour
     public float bulletPower;
     public bool goThrough;
     public GameObject explosion;
+    bool exploded;
 
     void Start()
     {
         if (type == BulletType.Grenade)
         {
-            StartCoroutine(DestroyBullet(5));
+            StartCoroutine(DestroyBullet(4));
         }
     }
 
@@ -31,7 +32,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        if (col.collider.CompareTag("bonhomme"))
+        if (col.collider.CompareTag("bonhomme") && type != BulletType.Grenade)
         {
             col.collider.GetComponent<BonhommeController>().Kill(transform.forward * bulletPower, true);
             if (!goThrough)
@@ -40,7 +41,7 @@ public class Bullet : MonoBehaviour
             }
 
         }
-        else if (col.collider.CompareTag("vehicle"))
+        else if (col.collider.CompareTag("vehicle") && type != BulletType.Grenade)
         {
             VehicleController v = col.gameObject.GetComponent<VehicleController>();
             v.life -= bulletPower;
@@ -50,7 +51,7 @@ public class Bullet : MonoBehaviour
             }
             StartCoroutine(DestroyBullet(0));
         }
-        else
+        else if (type != BulletType.Grenade)
         {
             StartCoroutine(DestroyBullet(0));
         }
@@ -59,9 +60,10 @@ public class Bullet : MonoBehaviour
     private IEnumerator DestroyBullet(float t)
     {
         yield return new WaitForSeconds(t);
-        if (type == BulletType.RPG || type == BulletType.Grenade)
+        if ((type == BulletType.RPG || type == BulletType.Grenade) && !exploded)
         {
             Instantiate(explosion, transform.position, Quaternion.identity);
+            exploded = true;
         }
         Destroy(this.gameObject);
     }

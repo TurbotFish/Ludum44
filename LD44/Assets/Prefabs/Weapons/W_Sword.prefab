@@ -57,7 +57,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 64910dae2b94a46b6810c5c81163faaa, type: 2}
+  - {fileID: 2100000, guid: 33e32f7fa6e6f0849ac6b3318d2fc75f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -139,8 +139,11 @@ MonoBehaviour:
   pickable: 1
   type: 5
   bullet: {fileID: 8963459624203665490, guid: 5b66f332e740d4135b285dad525d18b6, type: 3}
+  actionZone: {fileID: 7167801530813216620, guid: c18b9f8f07cbe448ca6d965bb748b137,
+    type: 3}
   rateOfAction: 0.3
   canFire: 1
+  fired: 0
   continuedShot: 0
 --- !u!1 &7991010787386726398
 GameObject:
@@ -199,7 +202,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 64910dae2b94a46b6810c5c81163faaa, type: 2}
+  - {fileID: 2100000, guid: 33e32f7fa6e6f0849ac6b3318d2fc75f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

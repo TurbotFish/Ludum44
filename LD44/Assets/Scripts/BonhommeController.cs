@@ -53,19 +53,20 @@ public class BonhommeController : MonoBehaviour
             alive = false;
             DropWeapon();
             rb.constraints = RigidbodyConstraints.None;
-            rb.AddForce(deathForce);
+            rb.AddForce(deathForce*100);
             if (shake)
             {
                 CameraShake.shakeDuration = 0.25f;
             }
             Destroy(this.gameObject, 3);
+            this.gameObject.tag = "Untagged";
         }
 
     }
 
     public void PickWeapon(GameObject w)
     {
-        if (noPick)
+        if (!noPick)
         {
             DropWeapon();
             w.transform.SetParent(weaponHold);
@@ -73,6 +74,7 @@ public class BonhommeController : MonoBehaviour
             w.transform.localEulerAngles = Vector3.zero;
             weaponGO = w;
             weapon = w.GetComponent<Weapon>();
+            weapon.pickable = false;
             StartCoroutine(NoPick(1));
         }
 
@@ -84,7 +86,7 @@ public class BonhommeController : MonoBehaviour
         {
             weaponGO.transform.SetParent(null);
             weapon.pickable = true;
-            weaponGO.transform.position = new Vector3(weaponGO.transform.position.x, 1, weaponGO.transform.position.z);
+            weaponGO.transform.position = new Vector3(weaponGO.transform.position.x, 2, weaponGO.transform.position.z);
             weaponGO = null;
             weapon = null;
         }

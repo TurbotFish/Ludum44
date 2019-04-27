@@ -150,8 +150,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickable: 1
-  type: 1
+  type: 3
   bullet: {fileID: 8963459624203665490, guid: da66e70719f64414c81ec7a7b4e6f299, type: 3}
+  actionZone: {fileID: 0}
   rateOfAction: 1
   canFire: 1
+  fired: 0
   continuedShot: 0
