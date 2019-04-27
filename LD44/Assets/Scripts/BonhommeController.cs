@@ -7,6 +7,7 @@ public class BonhommeController : MonoBehaviour
     Rigidbody rb;
     public bool alive;
     public bool invincible;
+    public bool noPick;
 
     public Transform weaponHold;
     public Transform weaponFire;
@@ -48,6 +49,7 @@ public class BonhommeController : MonoBehaviour
     {
         if (!invincible)
         {
+            gameObject.layer = LayerMask.NameToLayer("NoCollision");
             alive = false;
             DropWeapon();
             rb.constraints = RigidbodyConstraints.None;
@@ -56,18 +58,24 @@ public class BonhommeController : MonoBehaviour
             {
                 CameraShake.shakeDuration = 0.25f;
             }
-            Destroy(this.gameObject, 5);
+            Destroy(this.gameObject, 3);
         }
 
     }
 
     public void PickWeapon(GameObject w)
     {
-        w.transform.SetParent(weaponHold);
-        w.transform.localPosition = Vector3.zero;
-        w.transform.localEulerAngles = Vector3.zero;
-        weaponGO = w;
-        weapon = w.GetComponent<Weapon>();
+        if (noPick)
+        {
+            DropWeapon();
+            w.transform.SetParent(weaponHold);
+            w.transform.localPosition = Vector3.zero;
+            w.transform.localEulerAngles = Vector3.zero;
+            weaponGO = w;
+            weapon = w.GetComponent<Weapon>();
+            StartCoroutine(NoPick(1));
+        }
+
     }
 
     public void DropWeapon()
@@ -85,10 +93,14 @@ public class BonhommeController : MonoBehaviour
 
     public void EnterVehicle()
     {
-        DropWeapon();
-        GetComponent<CapsuleCollider>().enabled = false;
-        rb.isKinematic = true;
-        inVehicle = true;
+        if (!noPick)
+        {
+            DropWeapon();
+            GetComponent<CapsuleCollider>().enabled = false;
+            rb.isKinematic = true;
+            inVehicle = true;
+        }
+
     }
 
     public void ExitVehicle()
@@ -105,5 +117,12 @@ public class BonhommeController : MonoBehaviour
         invincible = true;
         yield return new WaitForSeconds(t);
         invincible = false;
+    }
+
+    public IEnumerator NoPick(float t)
+    {
+        noPick = true;
+        yield return new WaitForSeconds(t);
+        noPick = false;
     }
 }

@@ -6,8 +6,12 @@ public class PlayerInfo : MonoBehaviour
 {
 
     public string playerName;
-    public int playerHair;
-    public int playerHat;
+    public int playerHead;
     public int playerAccessories;
+
+    public int kills;
+
+    public int totalKills;
+
 
 }

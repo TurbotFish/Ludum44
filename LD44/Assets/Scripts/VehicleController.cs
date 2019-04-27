@@ -92,6 +92,8 @@ public class VehicleController : MonoBehaviour
         if (col.collider.CompareTag("bonhomme") && horizontalVelocity.magnitude > speedKillThreshold)
         {
             col.gameObject.GetComponent<BonhommeController>().Kill(rb.velocity, true);
+            StartCoroutine(player.NoPick(1));
+
         }
     }
 

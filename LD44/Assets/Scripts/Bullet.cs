@@ -9,17 +9,24 @@ public class Bullet : MonoBehaviour
     public BulletType type;
     public float bulletSpeed;
     public float bulletPower;
-
+    public bool goThrough;
+    public GameObject explosion;
 
     void Start()
     {
-        
+        if (type == BulletType.Grenade)
+        {
+            StartCoroutine(DestroyBullet(5));
+        }
     }
 
 
     void FixedUpdate()
     {
-        transform.Translate(0,0,bulletSpeed * Time.fixedDeltaTime);
+        if (type != BulletType.Grenade)
+        {
+            transform.Translate(0, 0, bulletSpeed * Time.fixedDeltaTime);
+        }
     }
 
     private void OnCollisionEnter(Collision col)
@@ -27,7 +34,10 @@ public class Bullet : MonoBehaviour
         if (col.collider.CompareTag("bonhomme"))
         {
             col.collider.GetComponent<BonhommeController>().Kill(transform.forward * bulletPower, true);
-            DestroyBullet();
+            if (!goThrough)
+            {
+                StartCoroutine(DestroyBullet(0));
+            }
 
         }
         else if (col.collider.CompareTag("vehicle"))
@@ -38,15 +48,21 @@ public class Bullet : MonoBehaviour
             {
                 v.Kill(transform.forward * bulletPower, true);
             }
+            StartCoroutine(DestroyBullet(0));
         }
         else
         {
-            DestroyBullet();
+            StartCoroutine(DestroyBullet(0));
         }
     }
 
-    void DestroyBullet()
+    private IEnumerator DestroyBullet(float t)
     {
+        yield return new WaitForSeconds(t);
+        if (type == BulletType.RPG || type == BulletType.Grenade)
+        {
+            Instantiate(explosion, transform.position, Quaternion.identity);
+        }
         Destroy(this.gameObject);
     }
 }
