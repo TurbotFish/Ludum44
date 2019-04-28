@@ -46,7 +46,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1
-  m_Center: {x: -0.63, y: 0, z: 0}
+  m_Center: {x: -0.63, y: 0, z: 0.3}
 --- !u!114 &612148084147773700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,6 +68,7 @@ MonoBehaviour:
   fired: 0
   continuedShot: 0
   playerAnim: {fileID: 9100000, guid: bdfcbad696706b0448dc1bcc8ae84745, type: 2}
+  owner: {fileID: 0}
 --- !u!114 &722106613386853857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +149,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 518350349e6c1b24f9c35ed7b8c6aa64,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: bb231fd085b13f44a82fa27a363a28d3, type: 2}
+    - target: {fileID: -1504981713932161579, guid: 518350349e6c1b24f9c35ed7b8c6aa64,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b7ceb5f5ded875e4398eb4ac30693cb5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 518350349e6c1b24f9c35ed7b8c6aa64, type: 3}
 --- !u!4 &422550923389378841 stripped
