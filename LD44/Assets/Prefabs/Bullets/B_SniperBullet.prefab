@@ -38,7 +38,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.6
+  m_Time: 0.3
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -165,7 +165,7 @@ MonoBehaviour:
   type: 2
   bulletSpeed: 60
   bulletPower: 4
-  goThrough: 0
+  goThrough: 1
   explosion: {fileID: 0}
   owner: {fileID: 0}
 --- !u!1001 &8062044158415364837
@@ -175,11 +175,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8963459624203665502}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 82461685cd1a1494693462e450f01cf2,
-        type: 3}
-      propertyPath: m_Name
-      value: M_Bullet
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 82461685cd1a1494693462e450f01cf2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -239,6 +234,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 82461685cd1a1494693462e450f01cf2,
+        type: 3}
+      propertyPath: m_Name
+      value: M_Bullet
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 82461685cd1a1494693462e450f01cf2,
         type: 3}
