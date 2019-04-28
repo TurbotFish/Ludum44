@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Black
+  m_Name: M_PaintedMetal_Blue
   m_Shader: {fileID: 4800000, guid: 28aa32180b3107b45823332a5af4e27d, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
@@ -69,9 +69,10 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.09
+    - _Glossiness: 0.277
     - _GlossyReflections: 1
     - _Gradient_Factor: 0.5
+    - _Invert_fresnel: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -84,5 +85,5 @@ Material:
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
-    - _Color: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
+    - _Color: {r: 0.11764705, g: 0.75869775, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

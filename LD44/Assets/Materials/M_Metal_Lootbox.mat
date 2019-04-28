@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Wood
+  m_Name: M_Metal_Lootbox
   m_Shader: {fileID: 4800000, guid: 28aa32180b3107b45823332a5af4e27d, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
