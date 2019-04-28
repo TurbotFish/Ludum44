@@ -20,5 +20,8 @@ public class PlayerInfoDB : ScriptableObject
     public List<GameObject> availableSkins;
     public List<GameObject> unlockableSkins;
 
+    [Header("HAIRS")]
+    public List<GameObject> availableHairs;
+    public List<GameObject> unlockableHairs;
 
 }

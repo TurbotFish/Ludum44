@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class AssetName : MonoBehaviour
 {
-    public string name = "asset name";
+    public string asset = "asset name";
 }
