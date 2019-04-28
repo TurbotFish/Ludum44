@@ -5,12 +5,12 @@ using UnityEngine;
 public class MouseController : MonoBehaviour
 {
 
-    public Animator camAnimator;
     public float scrollSpeed;
     public float zoomSpeed;
     public float maxZoom;
     public Transform cam;
     public float minX, maxX, minY, maxY;
+    public FlowManager flowManger;
 
     // Start is called before the first frame update
     void Start()
@@ -27,13 +27,43 @@ public class MouseController : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, 300.0f))
             {
-                if (hit.collider.CompareTag("bonhomme"))
+
+                if (!FlowManager.inMenu)
                 {
-                    camAnimator.SetBool("select", true);
+                    if (hit.collider.CompareTag("bonhomme"))
+                    {
+                        Debug.Log("bonhomme selected");
+                    }
+                    else
+                    {
+                        Debug.Log("bonhomme unselected");
+                    }
                 }
-                else
+
+            }
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, 300.0f))
+            {
+
+                if (FlowManager.inMenu)
                 {
-                    camAnimator.SetBool("select", false);
+                    if (hit.collider.CompareTag("goButton"))
+                    {
+                        Debug.Log("C'EST BON");
+                        ButtonScript button = hit.collider.GetComponentInParent<ButtonScript>();
+                        if (button.clickable)
+                        {
+                            button.OnClick();
+                            flowManger.ClickTransition(button.transition);
+
+                        }
+
+
+                    }
                 }
             }
         }
@@ -42,12 +72,12 @@ public class MouseController : MonoBehaviour
 
         //RTS CAM:
 
-        cam.localPosition = new Vector3(cam.localPosition.x, cam.localPosition.y, Mathf.Clamp(cam.localPosition.z + Input.mouseScrollDelta.y*zoomSpeed,0, maxZoom));
+        cam.localPosition = new Vector3(cam.localPosition.x, cam.localPosition.y, Mathf.Clamp(cam.localPosition.z + Input.mouseScrollDelta.y * zoomSpeed, 0, maxZoom));
 
 
         float zoomFactor = cam.localPosition.z / maxZoom;
 
-        if (Input.mousePosition.y >= Screen.height * 0.95f && cam.localPosition.y < maxY*zoomFactor)
+        if (Input.mousePosition.y >= Screen.height * 0.95f && cam.localPosition.y < maxY * zoomFactor)
         {
             cam.Translate(Vector3.forward * Time.deltaTime * scrollSpeed, Space.World);
         }
@@ -55,11 +85,11 @@ public class MouseController : MonoBehaviour
         {
             cam.Translate(Vector3.back * Time.deltaTime * scrollSpeed, Space.World);
         }
-        if(Input.mousePosition.x >= Screen.width * 0.95f && cam.localPosition.x < maxX * zoomFactor)
+        if (Input.mousePosition.x >= Screen.width * 0.95f && cam.localPosition.x < maxX * zoomFactor)
         {
             cam.Translate(Vector3.right * Time.deltaTime * scrollSpeed, Space.World);
         }
-        if(Input.mousePosition.x <= Screen.width * 0.05f && cam.localPosition.x > minX * zoomFactor)
+        if (Input.mousePosition.x <= Screen.width * 0.05f && cam.localPosition.x > minX * zoomFactor)
         {
             cam.Translate(Vector3.left * Time.deltaTime * scrollSpeed, Space.World);
         }

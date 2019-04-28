@@ -7,6 +7,8 @@ public class Explosion : MonoBehaviour
     public float explosionForce;
     public float explosionDamage;
     bool exploded;
+    public PlayerInfo owner;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +30,21 @@ public class Explosion : MonoBehaviour
             if (hitCollider.CompareTag("bonhomme"))
             {
                 BonhommeController bc = hitCollider.GetComponent<BonhommeController>();
-                bc.Kill((bc.transform.position - (transform.position + col.center)).normalized * explosionForce, true);
+                bc.Kill((bc.transform.position - (transform.position + col.center)).normalized * explosionForce, true, true);
+                PlayerInfo victim = hitCollider.GetComponent<PlayerInfo>();
+                if (owner == victim)
+                {
+                    FlowManager.Instance.SendChatMessage(owner.name + " killed themselves...");
+                    FlowManager.Instance.RemovePlayer(victim, false);
+                }
+                else
+                {
+                    FlowManager.Instance.SendChatMessage(owner.name + " blew " + hitCollider.GetComponent<PlayerInfo>().name + " up");
+                    FlowManager.Instance.RemovePlayer(victim, true);
+                    owner.kills++;
+                    owner.totalKills++;
+                }
+
             }
             else if (hitCollider.CompareTag("vehicle"))
             {

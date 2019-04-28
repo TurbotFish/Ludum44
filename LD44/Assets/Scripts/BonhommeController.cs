@@ -8,13 +8,16 @@ public class BonhommeController : MonoBehaviour
     public bool alive;
     public bool invincible;
     public bool noPick;
-
+    public Animator anim;
+    public PlayerInfo playerInfo;
     public Transform weaponHold;
     public Transform weaponFire;
     GameObject weaponGO;
     Weapon weapon;
 
     bool inVehicle;
+
+   // public FlowManager flowManager;
 
     void Start()
     {
@@ -27,6 +30,8 @@ public class BonhommeController : MonoBehaviour
     {
         if (CrowdController.firing)
         {
+            anim.SetTrigger("Shoot");
+
             if (weapon != null)
             {
                 weapon.FireWeapon(weaponFire);
@@ -42,10 +47,18 @@ public class BonhommeController : MonoBehaviour
             rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.z);
             this.transform.Rotate(new Vector3(0, CrowdController.rotationInput * CrowdController.rotationSpeed, 0));
 
+            if (CrowdController.moveInput >= 0.1f || CrowdController.moveInput <= -0.1f)
+            {
+                anim.SetBool("Running", true);
+            }
+            else
+            {
+                anim.SetBool("Running", false);
+            }
         }
     }
 
-    public void Kill(Vector3 deathForce, bool shake)
+    public void Kill(Vector3 deathForce, bool shake, bool kill)
     {
         if (!invincible)
         {
@@ -60,6 +73,9 @@ public class BonhommeController : MonoBehaviour
             }
             Destroy(this.gameObject, 3);
             this.gameObject.tag = "Untagged";
+
+            PlayerInfo pi = GetComponent<PlayerInfo>();
+            FlowManager.Instance.RemovePlayer(pi, kill);
         }
 
     }
@@ -74,7 +90,9 @@ public class BonhommeController : MonoBehaviour
             w.transform.localEulerAngles = Vector3.zero;
             weaponGO = w;
             weapon = w.GetComponent<Weapon>();
+            anim.runtimeAnimatorController = weapon.playerAnim;
             weapon.pickable = false;
+            weapon.owner = playerInfo;
             StartCoroutine(NoPick(1));
         }
 

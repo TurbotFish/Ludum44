@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 3444488195297485327}
   - component: {fileID: 3444488195297485326}
   - component: {fileID: 3444488195297485325}
+  - component: {fileID: -5338352558553395553}
   m_Layer: 0
   m_Name: W_Sniper
   m_TagString: Untagged
@@ -144,6 +145,20 @@ MonoBehaviour:
   canFire: 1
   fired: 0
   continuedShot: 0
+  playerAnim: {fileID: 0}
+--- !u!114 &-5338352558553395553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3444488195297485324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd98b5ca7a3dd4dc0be43fa3ebc92862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: asset name
 --- !u!1 &3444488196290048063
 GameObject:
   m_ObjectHideFlags: 0

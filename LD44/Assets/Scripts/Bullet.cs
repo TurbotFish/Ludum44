@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
     public bool goThrough;
     public GameObject explosion;
     bool exploded;
+    public PlayerInfo owner;
 
     void Start()
     {
@@ -34,7 +35,21 @@ public class Bullet : MonoBehaviour
     {
         if (col.collider.CompareTag("bonhomme") && type != BulletType.Grenade)
         {
-            col.collider.GetComponent<BonhommeController>().Kill(transform.forward * bulletPower, true);
+            col.collider.GetComponent<BonhommeController>().Kill(transform.forward * bulletPower, true, true);
+            PlayerInfo victim = col.collider.GetComponent<PlayerInfo>();
+            if (owner == victim)
+            {
+                FlowManager.Instance.SendChatMessage(owner.name + " killed themselves...");
+                FlowManager.Instance.RemovePlayer(victim, false);
+            }
+            else
+            {
+                FlowManager.Instance.SendChatMessage(owner.name + " blew " + col.collider.GetComponent<PlayerInfo>().name + " up");
+                FlowManager.Instance.RemovePlayer(victim, true);
+                owner.kills++;
+                owner.totalKills++;
+            }
+
             if (!goThrough)
             {
                 StartCoroutine(DestroyBullet(0));
@@ -67,4 +82,6 @@ public class Bullet : MonoBehaviour
         }
         Destroy(this.gameObject);
     }
+
+
 }

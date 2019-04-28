@@ -14,6 +14,7 @@ public class VehicleController : MonoBehaviour
     public float life = 1;
     public Vector3 horizontalVelocity;
     public GameObject explosion;
+    public AudioSource klaxon;
 
     void Start()
     {
@@ -24,7 +25,7 @@ public class VehicleController : MonoBehaviour
 
     private void Update()
     {
-        if (CrowdController.firing && canKlaxon)
+        if (CrowdController.firing && canKlaxon && playerIn)
         {
             canKlaxon = false;
             StartCoroutine(Klaxon(Random.Range(0f, 0.5f)));
@@ -75,7 +76,7 @@ public class VehicleController : MonoBehaviour
     private IEnumerator Klaxon(float t)
     {
         yield return new WaitForSeconds(t);
-        Debug.Log("klaxon");
+        klaxon.Play();
     }
 
 
@@ -98,10 +99,23 @@ public class VehicleController : MonoBehaviour
 
         if (col.collider.CompareTag("bonhomme") && horizontalVelocity.magnitude > speedKillThreshold)
         {
-            col.gameObject.GetComponent<BonhommeController>().Kill(rb.velocity, true);
+            col.gameObject.GetComponent<BonhommeController>().Kill(rb.velocity, true, true);
             if (player != null)
             {
                 StartCoroutine(player.NoPick(1));
+            }
+            PlayerInfo victim = col.collider.GetComponent<PlayerInfo>();
+            if (player.playerInfo == victim)
+            {
+                FlowManager.Instance.SendChatMessage(victim.name + " killed themselves...");
+                FlowManager.Instance.RemovePlayer(victim, false);
+            }
+            else
+            {
+                FlowManager.Instance.SendChatMessage(player.playerInfo.name + " ran " + col.collider.GetComponent<PlayerInfo>().name + " over");
+                FlowManager.Instance.RemovePlayer(victim, true);
+                player.playerInfo.kills++;
+                player.playerInfo.totalKills++;
             }
 
         }

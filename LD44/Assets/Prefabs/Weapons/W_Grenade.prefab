@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 3694832771066353112}
   - component: {fileID: 3694832771066353113}
   - component: {fileID: 3694832771066353114}
+  - component: {fileID: 1529044901715296461}
   m_Layer: 0
   m_Name: W_Grenade
   m_TagString: Untagged
@@ -157,3 +158,17 @@ MonoBehaviour:
   canFire: 1
   fired: 0
   continuedShot: 0
+  playerAnim: {fileID: 0}
+--- !u!114 &1529044901715296461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3694832771066353115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd98b5ca7a3dd4dc0be43fa3ebc92862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: asset name

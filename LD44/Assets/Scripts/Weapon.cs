@@ -14,14 +14,15 @@ public class Weapon : MonoBehaviour
     public bool fired;
     public bool continuedShot;
     float rotationSpeed = 3;
+    public RuntimeAnimatorController playerAnim;
+    [HideInInspector]
+    public PlayerInfo owner;
 
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (pickable)
@@ -66,10 +67,12 @@ public class Weapon : MonoBehaviour
             if (type == WeaponType.Handgun || type == WeaponType.AssaultRifle || type == WeaponType.Sniper || type == WeaponType.RPG)
             {
                 GameObject b = Instantiate(bullet, origin.position, origin.rotation) as GameObject;
+                b.GetComponent<Bullet>().owner = owner;
             }
             else if (type == WeaponType.Sword)
             {
                 GameObject zone = Instantiate(actionZone, transform.position + transform.forward*(actionZone.GetComponent<SphereCollider>().radius+0.5f), Quaternion.identity) as GameObject;
+                zone.GetComponent<Explosion>().owner = owner;
             }
             else if (type == WeaponType.Grenade)
             {

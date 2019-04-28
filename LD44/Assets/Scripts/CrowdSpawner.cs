@@ -7,9 +7,10 @@ public class CrowdSpawner : MonoBehaviour
     public GameObject playerPrefab;
     public float raycastHeight;
     public  float minX,maxX, minY, maxY;
-    public int numberOfPlayersToInstantiate;
+    public int numberOfPlayers;
 
     public GameObject plane, fakeShadow;
+    //public FlowManager flowManager;
 
     // Start is called before the first frame update
     void Start()
@@ -20,15 +21,13 @@ public class CrowdSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            InstantiateCrowd(numberOfPlayersToInstantiate);
-        }
+
     }
 
-    public IEnumerator InstantiateCrowd(int numberOfPlayers)
+    public IEnumerator InstantiateCrowd()
     {
-
+        plane.GetComponent<Animation>().Play();
+        yield return new WaitForSeconds(0.5f);
         int i = 0;
         int sec = 0;
         while (i<numberOfPlayers && sec < 500)
@@ -42,9 +41,15 @@ public class CrowdSpawner : MonoBehaviour
             {
                 if (hit.collider.CompareTag("ground"))
                 {
-                    GameObject p = Instantiate(playerPrefab, hit.point + Vector3.up * 0.5f, Quaternion.identity) as GameObject;
+                    GameObject p = Instantiate(playerPrefab, hit.point + Vector3.up * 100f, Quaternion.identity) as GameObject;
                     p.transform.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
-                    yield return new WaitForSeconds(0.012f);
+                    p.GetComponent<Rigidbody>().velocity += new Vector3(0, -100f, 0);
+
+                    //GameObject s = Instantiate(fakeShadow, hit.point + Vector3.up * 0.1f, Quaternion.Euler(90,0,0)) as GameObject;
+                    //Destroy(s, 3);
+                    FlowManager.Instance.AddPlayer(p.GetComponent<PlayerInfo>());
+
+                    yield return new WaitForSeconds(0.01f);
                     i++;
                 }
             }

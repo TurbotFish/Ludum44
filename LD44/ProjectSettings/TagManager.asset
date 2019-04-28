@@ -8,6 +8,7 @@ TagManager:
   - ground
   - bullet
   - vehicle
+  - goButton
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - Ground
   - NoCollision
-  - 
+  - Decors
   - 
   - 
   - 
