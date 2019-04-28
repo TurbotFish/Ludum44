@@ -17,7 +17,7 @@ public class CrowdSpawner : MonoBehaviour
     public IEnumerator InstantiateCrowd()
     {
         plane.GetComponent<Animation>().Play();
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.9f);
         int i = 0;
         int sec = 0;
         while (i<numberOfPlayers && sec < 500)
@@ -67,7 +67,7 @@ public class CrowdSpawner : MonoBehaviour
 
                     //GameObject s = Instantiate(fakeShadow, hit.point + Vector3.up * 0.1f, Quaternion.Euler(90,0,0)) as GameObject;
                     //Destroy(s, 3);
-                    yield return new WaitForSeconds(0.01f);
+                    yield return new WaitForSeconds(0.002f);
                     i++;
                 }
 
@@ -81,8 +81,8 @@ public class CrowdSpawner : MonoBehaviour
 
     private IEnumerator ShakeImpact ()
     {
-        yield return new WaitForSeconds(0.5f);
-        CameraShake.shakeDuration = 0.05f;
+        yield return new WaitForSeconds(1f);
+        CameraShake.shakeDuration = 0.01f;
 
     }
 

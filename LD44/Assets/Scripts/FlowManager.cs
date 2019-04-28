@@ -247,7 +247,7 @@ public class FlowManager : Singleton<FlowManager>
         OpenDoors();
         yield return new WaitForSeconds(1);
         StartCoroutine(GetComponent<CrowdSpawner>().InstantiateCrowd());
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         inMenu = false;
         CrowdController.lockControls = false;
         zone.progressing = true;
