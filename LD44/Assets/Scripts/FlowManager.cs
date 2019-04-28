@@ -20,6 +20,7 @@ public class FlowManager : Singleton<FlowManager>
     [Header("LootBox")]
     public Animator lootboxAnim;
     public bool inLootbox;
+    public int lootboxPrice;
 
     [Header("InGameUI")]
     public TextMeshPro topPlayerText;
@@ -54,6 +55,11 @@ public class FlowManager : Singleton<FlowManager>
         {
             StartCoroutine(EndBattle());
         }
+
+        if (inLootbox && Input.GetButton("action"))
+        {
+            StartCoroutine(QuitLootbox());
+        }
     }
 
     public void SpawnItems()
@@ -64,7 +70,11 @@ public class FlowManager : Singleton<FlowManager>
         {
             mapSpawners.Add(spawn.GetComponent<Spawner>());
         }
-        List<int> numbers = new List<int>(mapSpawners.Count);
+        List<int> numbers = new List<int>();
+        for (int h = 0; h < mapSpawners.Count; h++)
+        {
+            numbers.Add(h);
+        }
         int toRemove = mapSpawners.Count - numberOfItem;
         for (int i = 0;i<toRemove;i++)
         {
@@ -180,7 +190,7 @@ public class FlowManager : Singleton<FlowManager>
         endBattle.SetBool("on", false);
         cam.position = camMenuPos.position;
         cam.rotation = camMenuPos.rotation;
-
+        Camera.main.transform.localPosition = Vector3.zero;
         yield return new WaitForSeconds(1);
         OpenDoors();
 
@@ -194,6 +204,7 @@ public class FlowManager : Singleton<FlowManager>
         yield return new WaitForSeconds(1);
         cam.position = camTutoPos.position;
         cam.rotation = camTutoPos.rotation;
+        Debug.Log(cam.position);
 
         yield return new WaitForSeconds(1);
         OpenDoors();
@@ -204,9 +215,18 @@ public class FlowManager : Singleton<FlowManager>
     {
         inMenu = true;
         CrowdController.lockControls = true;
-        Debug.Log("INLOOTBOX");
-        yield return new WaitForSeconds(4);
-        inLootbox = true;
+        if (money >= lootboxPrice)
+        {
+            money -= lootboxPrice;
+            lootboxAnim.SetTrigger("buy");
+            yield return new WaitForSeconds(4);
+            inLootbox = true;
+        }
+        else
+        {
+            Debug.Log("NOT ENOUGH MONEY");
+        }
+
     }
 
     private IEnumerator QuitLootbox()
@@ -214,9 +234,9 @@ public class FlowManager : Singleton<FlowManager>
         inMenu = true;
         CrowdController.lockControls = true;
         inLootbox = false;
-        Debug.Log("OUTLOOTBOX");
+        lootboxAnim.SetTrigger("quit");
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0);
 
     }
 

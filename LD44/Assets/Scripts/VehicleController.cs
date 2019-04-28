@@ -105,7 +105,7 @@ public class VehicleController : MonoBehaviour
                 StartCoroutine(player.NoPick(1));
             }
             PlayerInfo victim = col.collider.GetComponent<PlayerInfo>();
-            if (player.playerInfo == victim)
+            if (player.playerInfo==null)
             {
                 FlowManager.Instance.SendChatMessage(victim.name + " killed themselves...");
                 FlowManager.Instance.RemovePlayer(victim, false);
