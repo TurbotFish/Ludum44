@@ -232,6 +232,7 @@ MonoBehaviour:
   explosion: {fileID: 540961938444212608, guid: c5d1cd9a728f86542a964ae28c303497,
     type: 3}
   klaxon: {fileID: 7933103609036137907}
+  animController: {fileID: 9100000, guid: 3f2f44269b389a843bfa2f55abeb4885, type: 2}
 --- !u!114 &-3785881394682771805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd98b5ca7a3dd4dc0be43fa3ebc92862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: asset name
+  asset: asset name
 --- !u!1 &6746990455227535324
 GameObject:
   m_ObjectHideFlags: 0

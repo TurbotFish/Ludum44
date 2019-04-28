@@ -68,7 +68,7 @@ MonoBehaviour:
   canFire: 1
   fired: 0
   continuedShot: 0
-  playerAnim: {fileID: 0}
+  playerAnim: {fileID: 9100000, guid: 3101ef457c867434d883275674846409, type: 2}
   owner: {fileID: 0}
 --- !u!114 &-8441915281322107809
 MonoBehaviour:
@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd98b5ca7a3dd4dc0be43fa3ebc92862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: asset name
+  asset: asset name
 --- !u!1001 &7275079569011277402
 PrefabInstance:
   m_ObjectHideFlags: 0

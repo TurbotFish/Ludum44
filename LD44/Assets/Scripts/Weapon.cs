@@ -45,11 +45,15 @@ public class Weapon : MonoBehaviour
         }
         else if (other.CompareTag("vehicle") && pickable)
         {
-            pickable = false;
             VehicleController v = other.GetComponent<VehicleController>();
-            v.player.PickWeapon(this.gameObject);
-            v.player.ExitVehicle();
-            v.ResetVehicle();
+            if (!v.player.noPick)
+            {
+                pickable = false;
+                v.player.PickWeapon(this.gameObject);
+                v.player.ExitVehicle();
+                v.ResetVehicle();
+            }
+
         }
     }
 
@@ -78,7 +82,6 @@ public class Weapon : MonoBehaviour
             {
                 GameObject b = Instantiate(bullet, origin.position, origin.rotation) as GameObject;
                 b.GetComponent<Rigidbody>().AddForce((Vector3.up*0.5f + b.transform.forward.normalized) * 100);
-                Debug.Log((Vector3.up + b.transform.forward));
             }
         }
 

@@ -115,6 +115,14 @@ MonoBehaviour:
   playerInfo: {fileID: 6337364734441671951}
   weaponHold: {fileID: 1861190731125262624}
   weaponFire: {fileID: 1861190730102501389}
+  weaponGO: {fileID: 0}
+  weapon: {fileID: 0}
+  inZone: 0
+  zoneTimer: 0
+  head: {fileID: 7743973015787027161}
+  inVehicle: 0
+  defaultAnimController: {fileID: 9100000, guid: 78570777ce983d54db1377f0cd849ef3,
+    type: 2}
 --- !u!114 &6337364734441671951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +273,12 @@ Transform:
 --- !u!4 &1848469248019934444 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6486983894681042087, guid: 5b85e8c8275527d458ca74c8c05ee2c6,
+    type: 3}
+  m_PrefabInstance: {fileID: 4350070938946858933}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7743973015787027161 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2943506886242118292, guid: 5b85e8c8275527d458ca74c8c05ee2c6,
     type: 3}
   m_PrefabInstance: {fileID: 4350070938946858933}
   m_PrefabAsset: {fileID: 0}

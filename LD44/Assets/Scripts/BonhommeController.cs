@@ -12,10 +12,17 @@ public class BonhommeController : MonoBehaviour
     public PlayerInfo playerInfo;
     public Transform weaponHold;
     public Transform weaponFire;
-    GameObject weaponGO;
-    Weapon weapon;
+    [HideInInspector]
+    public GameObject weaponGO;
+    [HideInInspector]
+    public Weapon weapon;
+    public bool inZone;
+    public float zoneTimer;
+    public Transform head;
+    public bool inVehicle;
+    public ParticleSystem impactFX;
 
-    bool inVehicle;
+    public RuntimeAnimatorController defaultAnimController;
 
    // public FlowManager flowManager;
 
@@ -71,7 +78,7 @@ public class BonhommeController : MonoBehaviour
             {
                 CameraShake.shakeDuration = 0.25f;
             }
-            Destroy(this.gameObject, 3);
+            Destroy(this.gameObject, 0.1f);
             this.gameObject.tag = "Untagged";
 
             PlayerInfo pi = GetComponent<PlayerInfo>();
@@ -84,6 +91,8 @@ public class BonhommeController : MonoBehaviour
     {
         if (!noPick)
         {
+            Debug.Log("pick");
+
             DropWeapon();
             w.transform.SetParent(weaponHold);
             w.transform.localPosition = Vector3.zero;
@@ -100,6 +109,7 @@ public class BonhommeController : MonoBehaviour
 
     public void DropWeapon()
     {
+        Debug.Log("drop");
         if (weaponGO != null)
         {
             weaponGO.transform.SetParent(null);
@@ -111,12 +121,15 @@ public class BonhommeController : MonoBehaviour
 
     }
 
-    public void EnterVehicle()
+    public void EnterVehicle(VehicleController vhc)
     {
+        Debug.Log("enter");
         if (!noPick)
         {
+            StartCoroutine(NoPick(1));
             DropWeapon();
             GetComponent<CapsuleCollider>().enabled = false;
+            anim.runtimeAnimatorController = vhc.animController;
             rb.isKinematic = true;
             inVehicle = true;
         }
@@ -125,17 +138,24 @@ public class BonhommeController : MonoBehaviour
 
     public void ExitVehicle()
     {
+        Debug.Log("exit");
         StartCoroutine(GodFrames(2f));
+        transform.SetParent(null);
         inVehicle = false;
         GetComponent<CapsuleCollider>().enabled = true;
         rb.isKinematic = false;
+        anim.runtimeAnimatorController = defaultAnimController;
 
     }
 
     public IEnumerator GodFrames(float t)
     {
         invincible = true;
+        GetComponent<CapsuleCollider>().enabled = false;
+        rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
         yield return new WaitForSeconds(t);
+        GetComponent<CapsuleCollider>().enabled = true;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
         invincible = false;
     }
 
@@ -144,5 +164,15 @@ public class BonhommeController : MonoBehaviour
         noPick = true;
         yield return new WaitForSeconds(t);
         noPick = false;
+    }
+
+    public IEnumerator InZone(float t)
+    {
+        yield return new WaitForSeconds(t);
+        if (inZone)
+        {
+            invincible = false;
+            Kill(Vector3.zero, false, false);
+        }
     }
 }

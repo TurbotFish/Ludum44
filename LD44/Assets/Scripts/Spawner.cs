@@ -6,23 +6,21 @@ public class Spawner : MonoBehaviour
 {
     public enum SpawnType {Weapon, Vehicle}
     public SpawnType type;
-    private PlayerInfoDB db;
 
     // Start is called before the first frame update
     public void Spawn()
     {
-        db = FlowManager.Instance.db;
         if (type == SpawnType.Weapon)
         {
-            int i = Random.Range(0, db.availableWeapons.Count);
-            GameObject go = Instantiate(db.availableWeapons[i], transform.position, transform.rotation) as GameObject;
+            int i = Random.Range(0, FlowManager.Instance.availableWeapons.Count);
+            GameObject go = Instantiate(FlowManager.Instance.availableWeapons[i], transform.position, transform.rotation) as GameObject;
             FlowManager.Instance.mapItems.Add(go);
         }
 
         if (type == SpawnType.Vehicle)
         {
-            int i = Random.Range(0, db.availableVehicles.Count);
-            GameObject go = Instantiate(db.availableVehicles[i], transform.position, transform.rotation) as GameObject;
+            int i = Random.Range(0, FlowManager.Instance.availableVehicles.Count);
+            GameObject go = Instantiate(FlowManager.Instance.availableVehicles[i], transform.position, transform.rotation) as GameObject;
             FlowManager.Instance.mapItems.Add(go);
 
         }

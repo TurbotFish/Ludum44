@@ -9,6 +9,7 @@ TagManager:
   - bullet
   - vehicle
   - goButton
+  - zone
   layers:
   - Default
   - TransparentFX
