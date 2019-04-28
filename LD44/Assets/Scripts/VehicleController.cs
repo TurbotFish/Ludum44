@@ -15,6 +15,8 @@ public class VehicleController : MonoBehaviour
     public Vector3 horizontalVelocity;
     public GameObject explosion;
     public AudioSource klaxon;
+    public RuntimeAnimatorController animController;
+
 
     void Start()
     {
@@ -87,7 +89,7 @@ public class VehicleController : MonoBehaviour
         {
             playerIn = true;
             player = other.GetComponent<BonhommeController>();
-            player.EnterVehicle();
+            player.EnterVehicle(this);
             other.transform.SetParent(playerPlace);
             other.transform.localPosition = Vector3.zero;
             other.transform.localEulerAngles = Vector3.zero;

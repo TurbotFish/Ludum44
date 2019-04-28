@@ -12,17 +12,7 @@ public class CrowdSpawner : MonoBehaviour
     public GameObject plane, fakeShadow;
     //public FlowManager flowManager;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public IEnumerator InstantiateCrowd()
     {
@@ -50,7 +40,6 @@ public class CrowdSpawner : MonoBehaviour
                     foreach(MeshRenderer mesh in meshes)
                     {
                         mesh.material = skin;
-                        Debug.Log("yes");
                     }
                     //GameObject s = Instantiate(fakeShadow, hit.point + Vector3.up * 0.1f, Quaternion.Euler(90,0,0)) as GameObject;
                     //Destroy(s, 3);

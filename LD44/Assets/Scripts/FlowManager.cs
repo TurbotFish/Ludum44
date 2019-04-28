@@ -16,6 +16,7 @@ public class FlowManager : Singleton<FlowManager>
 
     [Header("EndBattle")]
     public Animator endBattle;
+    public GameObject playerAvatar;
 
     [Header("LootBox")]
     public Animator lootboxAnim;
@@ -28,6 +29,8 @@ public class FlowManager : Singleton<FlowManager>
     public GameObject itemAGO, itemBGO, itemCGO;
     public float objectsRotationSpeed;
 
+    [Header("Zone")]
+    public PlayZone zone;
 
     [Header("InGameUI")]
     public TextMeshPro topPlayerText;
@@ -138,8 +141,15 @@ public class FlowManager : Singleton<FlowManager>
     }
     public void RemovePlayer(PlayerInfo p, bool kill)
     {
-        players.Remove(p);
-        playerCount--;
+        if (players.Contains(p))
+        {
+            if (playerCount>1)
+            {
+                players.Remove(p);
+            }
+            playerCount--;
+        }
+
         if (kill)
         {
             killCount++;
@@ -177,13 +187,14 @@ public class FlowManager : Singleton<FlowManager>
         }
     }
     
-    private IEnumerator StartOfTheGame()
+    /*private IEnumerator StartOfTheGame()
     {
+        zone.gameObject.SetActive(false);
         inMenu = true;
         CrowdController.lockControls = true;
         yield return new WaitForSeconds(0);
         CloseDoors();
-    }
+    }*/
 
     private void CloseDoors()
     {
@@ -202,22 +213,26 @@ public class FlowManager : Singleton<FlowManager>
         CrowdController.lockControls = true;
         CloseDoors();
         yield return new WaitForSeconds(1);
+        zone.gameObject.SetActive(true);
+        zone.Reset();
         SpawnItems();
         ResetPlayerData();
         cam.position = camGamePos.position;
         cam.rotation = camGamePos.rotation;
         yield return new WaitForSeconds(1);
         OpenDoors();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         StartCoroutine(GetComponent<CrowdSpawner>().InstantiateCrowd());
         yield return new WaitForSeconds(2);
         inMenu = false;
         CrowdController.lockControls = false;
+        zone.progressing = true;
 
     }
 
     private IEnumerator EndBattle()
     {
+        zone.progressing = false;
         inMenu = true;
         CrowdController.lockControls = true;
         yield return new WaitForSeconds(0.5f);
@@ -230,6 +245,7 @@ public class FlowManager : Singleton<FlowManager>
         CrowdController.lockControls = true;
         CloseDoors();
         yield return new WaitForSeconds(1);
+        zone.gameObject.SetActive(false);
         endBattle.SetBool("on", false);
         cam.position = camMenuPos.position;
         cam.rotation = camMenuPos.rotation;
@@ -241,6 +257,7 @@ public class FlowManager : Singleton<FlowManager>
 
     private IEnumerator GoToTuto()
     {
+        zone.gameObject.SetActive(false);
         inMenu = true;
         CrowdController.lockControls = true;
         CloseDoors();

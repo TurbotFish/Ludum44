@@ -14,8 +14,12 @@ public class BonhommeController : MonoBehaviour
     public Transform weaponFire;
     GameObject weaponGO;
     Weapon weapon;
+    public bool inZone;
+    public float zoneTimer;
 
-    bool inVehicle;
+    public bool inVehicle;
+
+    public RuntimeAnimatorController defaultAnimController;
 
    // public FlowManager flowManager;
 
@@ -71,7 +75,7 @@ public class BonhommeController : MonoBehaviour
             {
                 CameraShake.shakeDuration = 0.25f;
             }
-            Destroy(this.gameObject, 3);
+            Destroy(this.gameObject, 0.1f);
             this.gameObject.tag = "Untagged";
 
             PlayerInfo pi = GetComponent<PlayerInfo>();
@@ -111,12 +115,13 @@ public class BonhommeController : MonoBehaviour
 
     }
 
-    public void EnterVehicle()
+    public void EnterVehicle(VehicleController vhc)
     {
         if (!noPick)
         {
             DropWeapon();
             GetComponent<CapsuleCollider>().enabled = false;
+            anim.runtimeAnimatorController = defaultAnimController;
             rb.isKinematic = true;
             inVehicle = true;
         }
@@ -144,5 +149,15 @@ public class BonhommeController : MonoBehaviour
         noPick = true;
         yield return new WaitForSeconds(t);
         noPick = false;
+    }
+
+    public IEnumerator InZone(float t)
+    {
+        yield return new WaitForSeconds(t);
+        if (inZone)
+        {
+            invincible = false;
+            Kill(Vector3.zero, false, false);
+        }
     }
 }
