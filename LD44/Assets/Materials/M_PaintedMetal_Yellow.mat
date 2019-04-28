@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_PaintedMetal
+  m_Name: M_PaintedMetal_Yellow
   m_Shader: {fileID: 4800000, guid: 28aa32180b3107b45823332a5af4e27d, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
@@ -72,6 +72,7 @@ Material:
     - _Glossiness: 0.277
     - _GlossyReflections: 1
     - _Gradient_Factor: 0.5
+    - _Invert_fresnel: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -84,5 +85,5 @@ Material:
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.11792451, b: 0.11792451, a: 1}
+    - _Color: {r: 1, g: 0.9041148, b: 0.11764705, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
