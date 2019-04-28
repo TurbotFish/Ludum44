@@ -11,12 +11,22 @@ public class FlowManager : Singleton<FlowManager>
     public Transform camTutoPos;
     public Transform cam;
 
+
+    [Header("Save")]
+    public BonhommeController playerSave;
+    public Weapon weaponSave;
+
     [Header("Transition")]
     public Animator doorsAnim;
 
     [Header("EndBattle")]
     public Animator endBattle;
-    public GameObject playerAvatar;
+    public Transform playerAvatar;
+    public TextMeshPro endPlayerText, endKillsText, endDeathsText, endKillStreakText;
+
+    [Header("Menu")]
+    public Transform playerAvatarMenu;
+    public TextMeshPro moneyText;
 
     [Header("LootBox")]
     public Animator lootboxAnim;
@@ -40,9 +50,12 @@ public class FlowManager : Singleton<FlowManager>
     [Header("PlayerData")]
     public PlayerInfoDB db;
     public int money;
-    public static int killCount;
-    public static int deathCount;
-    public static int killStreak;
+    public GameObject crown;
+    public string topPlayerName;
+    public PlayerInfo topPlayerAlive;
+    public int killCount;
+    public int deathCount;
+    public int killStreak;
     public int playerCount;
     public List<PlayerInfo> players = new List<PlayerInfo>();
     public List<GameObject> mapItems = new List<GameObject>();
@@ -94,9 +107,10 @@ public class FlowManager : Singleton<FlowManager>
     // Update is called once per frame
     void Update()
     {
-        if (!inMenu&&playerCount<=1)
+        if (!inMenu&&players.Count<=1)
         {
             StartCoroutine(EndBattle());
+
         }
 
         if (inLootbox && canPass && Input.GetButton("Action"))
@@ -135,7 +149,6 @@ public class FlowManager : Singleton<FlowManager>
 
     public void AddPlayer(PlayerInfo p)
     {
-        p.playerName = names[Random.Range(0, names.Count - 1)];
         players.Add(p);
         playerCount++;
     }
@@ -158,6 +171,9 @@ public class FlowManager : Singleton<FlowManager>
         {
             deathCount++;
         }
+
+        p.Reset();
+        CheckKillStreak(p);
     }
 
     public void ResetPlayerData()
@@ -209,6 +225,14 @@ public class FlowManager : Singleton<FlowManager>
 
     private IEnumerator GoToBattle()
     {
+        foreach(GameObject go in mapItems)
+        {
+            if (go != null)
+            {
+                Destroy(go);
+            }
+        }
+        mapItems.Clear();
         inMenu = true;
         CrowdController.lockControls = true;
         CloseDoors();
@@ -232,15 +256,40 @@ public class FlowManager : Singleton<FlowManager>
 
     private IEnumerator EndBattle()
     {
+        playerSave = players[0].GetComponent<BonhommeController>();
+        if (playerSave.weapon != null)
+        {
+            weaponSave = playerSave.weapon;
+            mapItems.Remove(playerSave.weapon.gameObject);
+        }
+        if (playerSave.inVehicle == true)
+        {
+            playerSave.ExitVehicle();
+        }
+        players.Clear();
         zone.progressing = false;
         inMenu = true;
         CrowdController.lockControls = true;
         yield return new WaitForSeconds(0.5f);
         endBattle.SetBool("on", true);
+
+        playerSave.transform.position = playerAvatar.position;
+        playerSave.transform.rotation = playerAvatar.rotation;
+        playerSave.transform.SetParent(playerAvatar);
+        playerSave.GetComponent<Rigidbody>().isKinematic = true;
+
+        endPlayerText.text = playerSave.playerInfo.playerName;
+        endKillsText.text = killCount.ToString() + " players killed";
+        endDeathsText.text = deathCount.ToString() + " died by themselves...";
+        endKillStreakText.text = "Top killstreak was " + killStreak.ToString() + " by " + topPlayerName;
+
+        money += killCount;
+        moneyText.text = money.ToString();
     }
 
     private IEnumerator GoToMenu()
     {
+        moneyText.text = money.ToString();
         inMenu = true;
         CrowdController.lockControls = true;
         CloseDoors();
@@ -252,6 +301,10 @@ public class FlowManager : Singleton<FlowManager>
         Camera.main.transform.localPosition = Vector3.zero;
         yield return new WaitForSeconds(1);
         OpenDoors();
+        playerSave.transform.position = playerAvatarMenu.position;
+        playerSave.transform.rotation = playerAvatarMenu.rotation;
+        playerSave.transform.SetParent(playerAvatarMenu);
+        playerSave.GetComponent<Rigidbody>().isKinematic = true;
 
     }
 
@@ -278,6 +331,7 @@ public class FlowManager : Singleton<FlowManager>
         {
             inLootbox = true;
             money -= lootboxPrice;
+            moneyText.text = money.ToString();
             menuAnim.SetTrigger("in");
             yield return new WaitForSeconds(0.5f);
             lootboxAnim.SetTrigger("buy");
@@ -418,6 +472,7 @@ public class FlowManager : Singleton<FlowManager>
             availableSkins.Add(unlockableSkins[index]);
 
             GameObject s = Instantiate(unlockableSkins[index], item.position, item.rotation, item) as GameObject;
+            s.transform.eulerAngles += new Vector3(-90, 0, 0);
             itemGO = s;
             //s.GetComponent<VehicleController>().enabled = false;
             text.text = s.GetComponent<AssetName>().asset;
@@ -431,6 +486,7 @@ public class FlowManager : Singleton<FlowManager>
            availableHairs.Add(unlockableHairs[index]);
 
             GameObject h = Instantiate(unlockableHairs[index], item.position, item.rotation, item) as GameObject;
+            h.transform.eulerAngles += new Vector3(0, 0, -90f);
             itemGO = h;
             //v.GetComponent<VehicleController>().enabled = false;
             text.text = h.GetComponent<AssetName>().asset;
@@ -443,6 +499,32 @@ public class FlowManager : Singleton<FlowManager>
             Debug.Log("no more items");
             return;
         }
+
+    }
+
+    public void CheckKillStreak(PlayerInfo p)
+    {
+        if (p.kills > killStreak)
+        {
+            killStreak = p.kills;
+            if (topPlayerName != p.playerName)
+            {
+                topPlayerName = p.playerName;
+
+            }
+        }
+
+        int ks = 0;
+        for (int i = 0; i<players.Count;i++)
+        {
+            if (players[i].kills>ks)
+            {
+                topPlayerAlive = players[i];
+            }
+        }
+
+        crown.transform.SetParent(topPlayerAlive.transform);
+        crown.transform.localPosition = new Vector3 (0,2.1f,0);
 
     }
 

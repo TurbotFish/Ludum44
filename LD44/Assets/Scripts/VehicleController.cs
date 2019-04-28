@@ -57,6 +57,7 @@ public class VehicleController : MonoBehaviour
     {
         if (player != null)
         {
+            Debug.Log("exitKill");
             player.ExitVehicle();
         }
         alive = false;
@@ -87,12 +88,17 @@ public class VehicleController : MonoBehaviour
     {
         if (other.CompareTag("bonhomme") && !playerIn && horizontalVelocity.magnitude<speedKillThreshold)
         {
-            playerIn = true;
-            player = other.GetComponent<BonhommeController>();
-            player.EnterVehicle(this);
-            other.transform.SetParent(playerPlace);
-            other.transform.localPosition = Vector3.zero;
-            other.transform.localEulerAngles = Vector3.zero;
+            BonhommeController b = other.GetComponent<BonhommeController>();
+            if (!b.noPick)
+            {
+                playerIn = true;
+                player = b;
+                player.EnterVehicle(this);
+                other.transform.SetParent(playerPlace);
+                other.transform.localPosition = Vector3.zero;
+                other.transform.localEulerAngles = Vector3.zero;
+            }
+
         }
     }
 
@@ -101,24 +107,31 @@ public class VehicleController : MonoBehaviour
 
         if (col.collider.CompareTag("bonhomme") && horizontalVelocity.magnitude > speedKillThreshold)
         {
-            col.gameObject.GetComponent<BonhommeController>().Kill(rb.velocity, true, true);
-            if (player != null)
+            BonhommeController b = col.gameObject.GetComponent<BonhommeController>();
+            if (!b.invincible)
             {
-                StartCoroutine(player.NoPick(1));
-            }
-            PlayerInfo victim = col.collider.GetComponent<PlayerInfo>();
-            if (player!=null)
-            {
+                b.Kill(rb.velocity, true, true);
+                if (player != null)
+                {
+                    StartCoroutine(player.NoPick(1));
+                }
+                PlayerInfo victim = col.collider.GetComponent<PlayerInfo>();
+                if (player != null)
+                {
 
-                FlowManager.Instance.SendChatMessage(player.playerInfo.name + " ran " + col.collider.GetComponent<PlayerInfo>().name + " over");
-                FlowManager.Instance.RemovePlayer(victim, true);
-                player.playerInfo.kills++;
-                player.playerInfo.totalKills++;
-            }
-            else
-            {
-                FlowManager.Instance.SendChatMessage(victim.name + " killed themselves...");
-                FlowManager.Instance.RemovePlayer(victim, false);
+                    FlowManager.Instance.SendChatMessage(player.playerInfo.name + " ran " + col.collider.GetComponent<PlayerInfo>().name + " over");
+                    FlowManager.Instance.RemovePlayer(victim, true);
+                    player.playerInfo.kills++;
+                    player.playerInfo.totalKills++;
+                    FlowManager.Instance.CheckKillStreak(player.playerInfo);
+
+                }
+                else
+                {
+                    FlowManager.Instance.SendChatMessage(victim.name + " killed themselves...");
+                    FlowManager.Instance.RemovePlayer(victim, false);
+                }
+
             }
 
         }

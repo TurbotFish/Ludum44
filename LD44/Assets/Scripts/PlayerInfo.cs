@@ -13,5 +13,9 @@ public class PlayerInfo : MonoBehaviour
 
     public int totalKills;
 
+    public void Reset()
+    {
+        kills = 0;
+    }
 
 }

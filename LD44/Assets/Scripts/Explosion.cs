@@ -43,6 +43,7 @@ public class Explosion : MonoBehaviour
                     FlowManager.Instance.RemovePlayer(victim, true);
                     owner.kills++;
                     owner.totalKills++;
+                    FlowManager.Instance.CheckKillStreak(owner);
                 }
                 else
                 {

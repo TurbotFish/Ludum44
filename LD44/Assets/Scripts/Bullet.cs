@@ -41,13 +41,17 @@ public class Bullet : MonoBehaviour
             {
                 FlowManager.Instance.SendChatMessage(owner.name + " killed themselves...");
                 FlowManager.Instance.RemovePlayer(victim, false);
+                FlowManager.Instance.deathCount++;
             }
             else
             {
-                FlowManager.Instance.SendChatMessage(owner.name + " blew " + col.collider.GetComponent<PlayerInfo>().name + " up");
+                FlowManager.Instance.SendChatMessage(owner.name + " shot " + col.collider.GetComponent<PlayerInfo>().name);
                 FlowManager.Instance.RemovePlayer(victim, true);
                 owner.kills++;
                 owner.totalKills++;
+                FlowManager.Instance.killCount++;
+                FlowManager.Instance.CheckKillStreak(owner);
+
             }
 
             if (!goThrough)

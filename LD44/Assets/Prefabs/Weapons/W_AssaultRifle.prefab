@@ -67,7 +67,7 @@ MonoBehaviour:
   canFire: 1
   fired: 0
   continuedShot: 1
-  playerAnim: {fileID: 0}
+  playerAnim: {fileID: 9100000, guid: 4bb254129eaceb14189573cc8bf633e4, type: 2}
   owner: {fileID: 0}
 --- !u!114 &-755175207630456498
 MonoBehaviour:
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd98b5ca7a3dd4dc0be43fa3ebc92862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: asset name
+  asset: asset name
 --- !u!1001 &7502654433800834832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89,6 +89,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5669587400188241144}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 36c3e2a1021ab514aa8b243b3ddd698c,
+        type: 3}
+      propertyPath: m_Name
+      value: M_Ak47
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 36c3e2a1021ab514aa8b243b3ddd698c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -143,11 +148,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 36c3e2a1021ab514aa8b243b3ddd698c,
-        type: 3}
-      propertyPath: m_Name
-      value: M_Ak47
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 36c3e2a1021ab514aa8b243b3ddd698c,
         type: 3}

@@ -31,28 +31,59 @@ public class CrowdSpawner : MonoBehaviour
             {
                 if (hit.collider.CompareTag("ground"))
                 {
-                    GameObject p = Instantiate(playerPrefab, hit.point + Vector3.up * 100f, Quaternion.identity) as GameObject;
-                    p.transform.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
-                    p.GetComponent<Rigidbody>().velocity += new Vector3(0, -100f, 0);
-
-                    Material skin = FlowManager.Instance.availableSkins[Random.Range(0, FlowManager.Instance.availableSkins.Count)].GetComponentInChildren<MeshRenderer>().sharedMaterial;
-                    MeshRenderer[] meshes = p.GetComponentsInChildren<MeshRenderer>();
-                    foreach(MeshRenderer mesh in meshes)
+                    if (i==0)
                     {
-                        mesh.material = skin;
+                        GameObject p = Instantiate(FlowManager.Instance.playerSave.gameObject, hit.point + Vector3.up * 100f, Quaternion.identity) as GameObject;
+                        Destroy(FlowManager.Instance.playerSave.gameObject);
+                        p.transform.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
+                        p.GetComponent<Rigidbody>().velocity += new Vector3(0, -100f, 0);
+                        p.GetComponent<Rigidbody>().isKinematic = false;
+                        //p.GetComponent<PlayerInfo>().playerName = FlowManager.Instance.names[Random.Range(0, FlowManager.Instance.names.Count - 1)];
+                        p.GetComponent<PlayerInfo>().Reset();
+                        FlowManager.Instance.AddPlayer(p.GetComponent<PlayerInfo>());
+
+                        p.GetComponent<BonhommeController>().impactFX.Play();
                     }
+                    else
+                    {
+                        GameObject p = Instantiate(playerPrefab, hit.point + Vector3.up * 100f, Quaternion.identity) as GameObject;
+                        p.transform.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
+                        p.GetComponent<Rigidbody>().velocity += new Vector3(0, -100f, 0);
+
+                        Material skin = FlowManager.Instance.availableSkins[Random.Range(0, FlowManager.Instance.availableSkins.Count)].GetComponentInChildren<MeshRenderer>().sharedMaterial;
+                        MeshRenderer[] meshes = p.GetComponentsInChildren<MeshRenderer>();
+                        foreach (MeshRenderer mesh in meshes)
+                        {
+                            mesh.material = skin;
+                        }
+                        p.GetComponent<PlayerInfo>().playerName = FlowManager.Instance.names[Random.Range(0, FlowManager.Instance.names.Count - 1)];
+                        p.GetComponent<PlayerInfo>().Reset();
+
+                        FlowManager.Instance.AddPlayer(p.GetComponent<PlayerInfo>());
+
+                        p.GetComponent<BonhommeController>().impactFX.Play();
+
+                    }
+
                     //GameObject s = Instantiate(fakeShadow, hit.point + Vector3.up * 0.1f, Quaternion.Euler(90,0,0)) as GameObject;
                     //Destroy(s, 3);
-                    FlowManager.Instance.AddPlayer(p.GetComponent<PlayerInfo>());
-
                     yield return new WaitForSeconds(0.01f);
                     i++;
                 }
+
+                StartCoroutine(ShakeImpact());
             }
 
             sec++;
 
         }
+    }
+
+    private IEnumerator ShakeImpact ()
+    {
+        yield return new WaitForSeconds(0.5f);
+        CameraShake.shakeDuration = 0.05f;
+
     }
 
 }

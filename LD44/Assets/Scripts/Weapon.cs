@@ -45,11 +45,15 @@ public class Weapon : MonoBehaviour
         }
         else if (other.CompareTag("vehicle") && pickable)
         {
-            pickable = false;
             VehicleController v = other.GetComponent<VehicleController>();
-            v.player.PickWeapon(this.gameObject);
-            v.player.ExitVehicle();
-            v.ResetVehicle();
+            if (!v.player.noPick)
+            {
+                pickable = false;
+                v.player.PickWeapon(this.gameObject);
+                v.player.ExitVehicle();
+                v.ResetVehicle();
+            }
+
         }
     }
 
