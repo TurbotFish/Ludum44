@@ -1,11 +1,8 @@
 fileFormatVersion: 2
-guid: d6ec839eef9bc684fb0183a7e70a1a2f
+guid: a415a93268e2ffc46bc3be8468a2e341
 ModelImporter:
   serializedVersion: 25
-  internalIDToNameTable:
-  - first:
-      74: 1827226128182048838
-    second: ShootBazooka
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -33,62 +30,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: ShootBazooka
-      takeName: Take 001
-      internalID: 1827226128182048838
-      firstFrame: 0
-      lastFrame: 15
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Chara_Pelvis
-        weight: 0
-      - path: Chara_Pelvis/Chara_Body
-        weight: 1
-      - path: Chara_Pelvis/Chara_Body/Chara_ArmL
-        weight: 1
-      - path: Chara_Pelvis/Chara_Body/Chara_ArmL/Chara_HandL
-        weight: 1
-      - path: Chara_Pelvis/Chara_Body/Chara_ArmR
-        weight: 1
-      - path: Chara_Pelvis/Chara_Body/Chara_ArmR/Chara_HandR
-        weight: 1
-      - path: Chara_Pelvis/Chara_Body/Chara_ArmR/Chara_HandR/Chara_Props
-        weight: 1
-      - path: Chara_Pelvis/Chara_Body/Chara_Head
-        weight: 1
-      - path: Chara_Pelvis/Chara_LegL
-        weight: 0
-      - path: Chara_Pelvis/Chara_LegL/Chara_FootL
-        weight: 1
-      - path: Chara_Pelvis/Chara_LegR
-        weight: 0
-      - path: Chara_Pelvis/Chara_LegR/Chara_FootR
-        weight: 1
-      maskType: 1
-      maskSource: {fileID: 31900000, guid: 96cb7d4786d711949b7faa3f2ceb55ab, type: 2}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -106,8 +48,8 @@ ModelImporter:
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
-    skinWeightsMode: 1
-    maxBonesPerVertex: 1
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
     minBoneWeight: 0.001
     meshOptimizationFlags: -1
     indexFormat: 0
@@ -125,8 +67,8 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 1
-  copyAvatar: 1
+  importAnimation: 0
+  copyAvatar: 0
   humanDescription:
     serializedVersion: 3
     human: []
@@ -143,9 +85,8 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: f438603fe57aead4992648001caff5f0,
-    type: 3}
-  animationType: 2
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
