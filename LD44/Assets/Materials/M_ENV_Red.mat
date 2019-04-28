@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_ENV_Rock
+  m_Name: M_ENV_Red
   m_Shader: {fileID: 4800000, guid: 0d7323e51a535bf4a9b838e55649c882, type: 3}
-  m_ShaderKeywords: _INVERT_FRESNEL_ON _TOPGRASS_ON
+  m_ShaderKeywords: _INVERT_FRESNEL_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -86,12 +86,12 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _ToggleSwitch0: 0
-    - _TopGrass: 1
+    - _TopGrass: 0
     - _UVSec: 0
     - _Wind: 0
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
-    - _Color: {r: 0.48326808, g: 0.49679482, b: 0.5660378, a: 1}
+    - _Color: {r: 0.9622642, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Top_Color: {r: 0.53800285, g: 0.6603774, b: 0.2834639, a: 1}
