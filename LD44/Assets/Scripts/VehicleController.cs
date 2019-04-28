@@ -105,17 +105,18 @@ public class VehicleController : MonoBehaviour
                 StartCoroutine(player.NoPick(1));
             }
             PlayerInfo victim = col.collider.GetComponent<PlayerInfo>();
-            if (player.playerInfo==null)
+            if (player!=null)
             {
-                FlowManager.Instance.SendChatMessage(victim.name + " killed themselves...");
-                FlowManager.Instance.RemovePlayer(victim, false);
-            }
-            else
-            {
+
                 FlowManager.Instance.SendChatMessage(player.playerInfo.name + " ran " + col.collider.GetComponent<PlayerInfo>().name + " over");
                 FlowManager.Instance.RemovePlayer(victim, true);
                 player.playerInfo.kills++;
                 player.playerInfo.totalKills++;
+            }
+            else
+            {
+                FlowManager.Instance.SendChatMessage(victim.name + " killed themselves...");
+                FlowManager.Instance.RemovePlayer(victim, false);
             }
 
         }

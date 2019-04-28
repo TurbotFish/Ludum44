@@ -100,19 +100,9 @@ public class FlowManager : Singleton<FlowManager>
         {
             StartCoroutine(QuitLootbox());
         }
-
-        if (itemAGO != null)
-        {
-            itemAGO.transform.Rotate(0, objectsRotationSpeed, 0);
-        }
-        if (itemBGO != null)
-        {
-            itemBGO.transform.Rotate(0, objectsRotationSpeed, 0);
-        }
-        if (itemCGO != null)
-        {
-            itemCGO.transform.Rotate(0, objectsRotationSpeed, 0);
-        }
+        itemA.transform.Rotate(0, objectsRotationSpeed, 0);
+        itemB.transform.Rotate(0, objectsRotationSpeed, 0);
+        itemC.transform.Rotate(0, objectsRotationSpeed, 0);
     }
 
     public void SpawnItems()
@@ -218,7 +208,7 @@ public class FlowManager : Singleton<FlowManager>
         cam.rotation = camGamePos.rotation;
         yield return new WaitForSeconds(1);
         OpenDoors();
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         StartCoroutine(GetComponent<CrowdSpawner>().InstantiateCrowd());
         yield return new WaitForSeconds(2);
         inMenu = false;
@@ -297,16 +287,11 @@ public class FlowManager : Singleton<FlowManager>
         CrowdController.lockControls = true;
         inLootbox = false;
         menuAnim.SetTrigger("out");
-        yield return new WaitForSeconds(3f);
-
+        yield return new WaitForSeconds(2f);
         lootboxAnim.SetTrigger("quit");
-        if (itemAGO != null)
-            Destroy(itemA);
-        if (itemBGO != null)
-            Destroy(itemBGO);
-        if (itemC != null)
-            Destroy(itemCGO);
-
+        Destroy(itemA.GetChild(0).gameObject);
+        Destroy(itemB.GetChild(0).gameObject);
+        Destroy(itemC.GetChild(0).gameObject);
 
     }
 
@@ -381,7 +366,7 @@ public class FlowManager : Singleton<FlowManager>
             int index = Random.Range(0, unlockableVehicles.Count);
             availableVehicles.Add(unlockableVehicles[index]);
 
-            GameObject v = Instantiate(unlockableVehicles[index], item.position, item.rotation, item.parent) as GameObject;
+            GameObject v = Instantiate(unlockableVehicles[index], item.position, item.rotation, item) as GameObject;
             itemGO = v;
             v.GetComponent<VehicleController>().enabled = false;
             v.GetComponent<Rigidbody>().isKinematic = true;
@@ -402,7 +387,7 @@ public class FlowManager : Singleton<FlowManager>
             int index = Random.Range(0, unlockableWeapons.Count);
             availableWeapons.Add(unlockableWeapons[index]);
 
-            GameObject w = Instantiate(unlockableWeapons[index], item.position, item.rotation, item.parent) as GameObject;
+            GameObject w = Instantiate(unlockableWeapons[index], item.position, item.rotation, item) as GameObject;
             itemGO = w;
             w.GetComponent<Weapon>().enabled = false;
             text.text = w.GetComponent<AssetName>().asset;
@@ -415,7 +400,7 @@ public class FlowManager : Singleton<FlowManager>
             int index = Random.Range(0, unlockableSkins.Count);
             availableSkins.Add(unlockableSkins[index]);
 
-            GameObject s = Instantiate(unlockableSkins[index], item.position, item.rotation, item.parent) as GameObject;
+            GameObject s = Instantiate(unlockableSkins[index], item.position, item.rotation, item) as GameObject;
             itemGO = s;
             //s.GetComponent<VehicleController>().enabled = false;
             text.text = s.GetComponent<AssetName>().asset;
@@ -428,7 +413,7 @@ public class FlowManager : Singleton<FlowManager>
             int index = Random.Range(0, unlockableHairs.Count);
            availableHairs.Add(unlockableHairs[index]);
 
-            GameObject h = Instantiate(unlockableHairs[index], item.position, item.rotation, item.parent) as GameObject;
+            GameObject h = Instantiate(unlockableHairs[index], item.position, item.rotation, item) as GameObject;
             itemGO = h;
             //v.GetComponent<VehicleController>().enabled = false;
             text.text = h.GetComponent<AssetName>().asset;
