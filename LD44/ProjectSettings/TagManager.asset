@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - bonhomme
+  - ground
+  - bullet
+  - vehicle
+  - goButton
   layers:
   - Default
   - TransparentFX
@@ -14,9 +18,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Ground
+  - NoCollision
+  - Decors
   - 
   - 
   - 
