@@ -522,9 +522,13 @@ public class FlowManager : Singleton<FlowManager>
                 topPlayerAlive = players[i];
             }
         }
+        
+        if (topPlayerAlive!= null)
+        {
+            crown.transform.SetParent(topPlayerAlive.transform);
+            crown.transform.localPosition = new Vector3(0, 2.1f, 0);
+        }
 
-        crown.transform.SetParent(topPlayerAlive.transform);
-        crown.transform.localPosition = new Vector3 (0,2.1f,0);
 
     }
 

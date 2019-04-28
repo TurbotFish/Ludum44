@@ -172,7 +172,8 @@ public class BonhommeController : MonoBehaviour
         if (inZone)
         {
             invincible = false;
-            Kill(Vector3.zero, false, false);
+            if (this != null)
+                Kill(Vector3.zero, false, false);
         }
     }
 }

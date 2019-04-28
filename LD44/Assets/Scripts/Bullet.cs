@@ -49,7 +49,6 @@ public class Bullet : MonoBehaviour
                 FlowManager.Instance.RemovePlayer(victim, true);
                 owner.kills++;
                 owner.totalKills++;
-                FlowManager.Instance.killCount++;
                 FlowManager.Instance.CheckKillStreak(owner);
 
             }
@@ -81,6 +80,7 @@ public class Bullet : MonoBehaviour
         yield return new WaitForSeconds(t);
         if ((type == BulletType.RPG || type == BulletType.Grenade) && !exploded)
         {
+            Debug.Log("EXPLOSION");
             Instantiate(explosion, transform.position, Quaternion.identity);
             exploded = true;
         }

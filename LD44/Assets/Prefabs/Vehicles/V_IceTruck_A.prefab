@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6746990453915148032}
   - component: {fileID: 6746990453915148033}
-  - component: {fileID: 6746990453915148039}
   - component: {fileID: 6746990453915148038}
   - component: {fileID: 6746990453915148037}
   - component: {fileID: -8214464954624678216}
+  - component: {fileID: 1820443261972983435}
   m_Layer: 0
   m_Name: V_IceTruck_A
   m_TagString: vehicle
@@ -49,21 +49,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.23, y: 2, z: 3.9}
-  m_Center: {x: 0, y: 0.59, z: -0.12}
---- !u!135 &6746990453915148039
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6746990453915148034}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.12
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.44, y: 3.24, z: 3.9}
+  m_Center: {x: 0.12, y: 1.2, z: -0.12}
 --- !u!54 &6746990453915148038
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -119,6 +106,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asset: asset name
+--- !u!65 &1820443261972983435
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6746990453915148034}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.1, y: 1, z: 4.42}
+  m_Center: {x: 0.09, y: 0, z: -0.12}
 --- !u!1 &6746990455227535324
 GameObject:
   m_ObjectHideFlags: 0
