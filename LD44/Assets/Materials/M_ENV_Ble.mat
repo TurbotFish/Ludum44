@@ -75,7 +75,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.299
     - _GlossyReflections: 1
-    - _Gradient_Factor: 0
+    - _Gradient_Factor: 0.5
     - _Invert_fresnel: 1
     - _Metallic: 0
     - _Mode: 0
@@ -86,10 +86,12 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _ToggleSwitch0: 0
+    - _TopGrass: 0
     - _UVSec: 0
     - _Wind: 1
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.90447956, b: 0.5518868, a: 1}
+    - _Color: {r: 1, g: 0.9831216, b: 0.6650944, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Top_Color: {r: 0, g: 0, b: 0, a: 0}
