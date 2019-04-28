@@ -34,12 +34,17 @@ public class FlowManager : Singleton<FlowManager>
     public static int killStreak;
     public int playerCount;
     public List<PlayerInfo> players = new List<PlayerInfo>();
-
+    public List<GameObject> mapItems = new List<GameObject>();
+    public Transform spawnerList;
+    public int numberOfItem;
+    public List<Spawner> mapSpawners = new List<Spawner>();
+    
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(GoToTuto());
         ResetPlayerData();
+
     }
 
     // Update is called once per frame
@@ -48,6 +53,27 @@ public class FlowManager : Singleton<FlowManager>
         if (!inMenu&&playerCount<=1)
         {
             StartCoroutine(EndBattle());
+        }
+    }
+
+    public void SpawnItems()
+    {
+        mapSpawners.Clear();
+        mapItems.Clear();
+        foreach (Transform spawn in spawnerList)
+        {
+            mapSpawners.Add(spawn.GetComponent<Spawner>());
+        }
+        List<int> numbers = new List<int>(mapSpawners.Count);
+        int toRemove = mapSpawners.Count - numberOfItem;
+        for (int i = 0;i<toRemove;i++)
+        {
+            numbers.RemoveAt(Random.Range(0, numbers.Count));
+        }
+
+        for (int j=0;j<numbers.Count;j++)
+        {
+            mapSpawners[numbers[j]].Spawn();
         }
     }
 
@@ -123,6 +149,7 @@ public class FlowManager : Singleton<FlowManager>
         CrowdController.lockControls = true;
         CloseDoors();
         yield return new WaitForSeconds(1);
+        SpawnItems();
         ResetPlayerData();
         cam.position = camGamePos.position;
         cam.rotation = camGamePos.rotation;
@@ -197,4 +224,6 @@ public class FlowManager : Singleton<FlowManager>
     {
         Debug.Log(message);
     }
+
+
 }

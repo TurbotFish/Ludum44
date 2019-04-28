@@ -63,3 +63,22 @@ MonoBehaviour:
   - Louis
   - Marianne
   - Getrudator
+  availableWeapons:
+  - {fileID: 5669587400188241147, guid: 9503eec49a71d41a18691cd1beecdf6b, type: 3}
+  - {fileID: 3694832771066353115, guid: 35e042f803df945ceac9590639b61c3c, type: 3}
+  - {fileID: 7352429444430660452, guid: 83c3fcaec73ab4a2ea60abf95c4f92ac, type: 3}
+  - {fileID: 612148084147773701, guid: f7b23a44ea09942d8b5962b4b2c68473, type: 3}
+  - {fileID: 3444488195297485324, guid: c00d8dd45c1474830912118a9a4422f8, type: 3}
+  - {fileID: 1039430843718575954, guid: bcac2c7bf931a4db5a7374ed66e7f355, type: 3}
+  unlockableWeapons: []
+  availableVehicles:
+  - {fileID: 6746990453915148034, guid: 7b31a8f1c362d4662ba3f28d4897a6e9, type: 3}
+  - {fileID: 6746990453915148034, guid: 3dd3a54e2bcac49498b9f46febbd5e43, type: 3}
+  - {fileID: 6746990453915148034, guid: 7257a280ea8c84c01a23ba766b0230a9, type: 3}
+  unlockableVehicles:
+  - {fileID: 6746990453915148034, guid: 91b80c693b5f94501b046e70a659c72b, type: 3}
+  - {fileID: 6746990453915148034, guid: 3e92375ad228141f6a547132ad87d2e5, type: 3}
+  - {fileID: 6746990453915148034, guid: ccf16e3ef1354408a89ace52a525b8a7, type: 3}
+  - {fileID: 6746990453915148034, guid: ca38520cde2a045e0bb06f2fe62a28bf, type: 3}
+  availableSkins: []
+  unlockableSkins: []
