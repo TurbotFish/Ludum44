@@ -2926,15 +2926,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6355049780001142283, guid: 39706289d4ae144bf922e88f6881d046,
-        type: 3}
-      propertyPath: transition
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 481742359725984443, guid: 39706289d4ae144bf922e88f6881d046,
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355049780001142283, guid: 39706289d4ae144bf922e88f6881d046,
+        type: 3}
+      propertyPath: transition
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 481742359725984437, guid: 39706289d4ae144bf922e88f6881d046,
         type: 3}
@@ -16452,12 +16452,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 366fc55852cdf47138802180fd79335f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: -26
-  zoomSpeed: 1
+  scrollSpeed: -40
+  zoomSpeed: 5
   maxZoom: 100
   cam: {fileID: 1108351718}
-  minX: -40
-  maxX: 40
+  minX: -90
+  maxX: 90
   minY: -40
   maxY: 40
 --- !u!114 &1211464140
@@ -27829,6 +27829,11 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5005704050645584921, guid: e955544c5054a4c309d8a24f70f3ab6c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7772630965753258863, guid: e955544c5054a4c309d8a24f70f3ab6c,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -27983,11 +27988,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5005704050645584921, guid: e955544c5054a4c309d8a24f70f3ab6c,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2657638043888544507, guid: e955544c5054a4c309d8a24f70f3ab6c,
         type: 3}
