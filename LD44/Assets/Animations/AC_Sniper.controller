@@ -22,7 +22,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: f438603fe57aead4992648001caff5f0,
+  m_Motion: {fileID: 1827226128182048838, guid: 641617344751c0948abae2657dc9b2cc,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -101,7 +101,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: 5b85e8c8275527d458ca74c8c05ee2c6,
+  m_Motion: {fileID: 1827226128182048838, guid: 3f0863a00dc61574bb00878ee4c9b1df,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -259,7 +259,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: 540154eeeb977ae44b45dbaf153370e5,
+  m_Motion: {fileID: 1827226128182048838, guid: e2c02052ed3adb641bd0907143601e63,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -297,7 +297,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AC_Empty
+  m_Name: AC_Sniper
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Shoot
@@ -370,7 +370,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: 5b85e8c8275527d458ca74c8c05ee2c6,
+  m_Motion: {fileID: 1827226128182048838, guid: 3f0863a00dc61574bb00878ee4c9b1df,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -395,9 +395,9 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0.1
-  m_TransitionOffset: 0.2
-  m_ExitTime: 0.6
-  m_HasExitTime: 1
+  m_TransitionOffset: 0
+  m_ExitTime: 0.625
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -473,7 +473,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: f438603fe57aead4992648001caff5f0,
+  m_Motion: {fileID: 1827226128182048838, guid: 641617344751c0948abae2657dc9b2cc,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
