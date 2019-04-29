@@ -282,7 +282,7 @@ public class FlowManager : Singleton<FlowManager>
         inMenu = false;
         CrowdController.lockControls = false;
         zone.progressing = true;
-
+        Debug.Log(zone.progressing + "HELLO");
     }
 
     private IEnumerator EndBattle()
@@ -431,7 +431,7 @@ public class FlowManager : Singleton<FlowManager>
         }
         else
         {
-            Debug.Log("NOT ENOUGH MONEY");
+            //Debug.Log("NOT ENOUGH MONEY");
         }
 
     }
@@ -586,7 +586,7 @@ public class FlowManager : Singleton<FlowManager>
         //HAIRS
         else if (l == -1)
         {
-            Debug.Log("no more items");
+            //Debug.Log("no more items");
             return;
         }
 

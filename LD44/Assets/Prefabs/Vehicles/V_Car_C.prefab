@@ -221,7 +221,6 @@ MonoBehaviour:
     type: 3}
   klaxon: {fileID: 0}
   animController: {fileID: 9100000, guid: 3f2f44269b389a843bfa2f55abeb4885, type: 2}
-  engineSound: {fileID: 0}
 --- !u!114 &9062772061301648187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +259,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f67faf541970ac24ab476bdfa70cb873, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.35
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0

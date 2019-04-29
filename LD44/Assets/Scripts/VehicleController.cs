@@ -50,11 +50,12 @@ public class VehicleController : MonoBehaviour
             rb.AddForce(movement);
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
             this.transform.Rotate(new Vector3(0, CrowdController.rotationInput * rotationSpeed * Mathf.Clamp01(horizontalVelocity.magnitude/ speedKillThreshold), 0));
-            if (CrowdController.moveInput >= 0.02f)
+            if (Mathf.Abs(CrowdController.moveInput) >= 0.02f && !engineSound.isPlaying)
             {
+                //Debug.Log("sonnnn");
                 engineSound.Play();
             }
-            else
+            else if (Mathf.Abs(CrowdController.moveInput) < 0.02f && engineSound.isPlaying)
             {
                 engineSound.Stop();
             }

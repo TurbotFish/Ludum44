@@ -9,12 +9,21 @@ public class ButtonScript : MonoBehaviour
     public Animation anim;
     public AudioSource sound;
     public bool clickable = true;
+    public bool needMoney;
 
     public void OnClick()
     {
-        sound.Play();
-        anim.Play();
-        StartCoroutine(Clickable());
+        if (needMoney && FlowManager.Instance.money<FlowManager.Instance.lootboxPrice)
+        {
+
+        }
+        else
+        {
+            sound.Play();
+            anim.Play();
+            StartCoroutine(Clickable());
+        }
+
     }
 
     private IEnumerator Clickable()

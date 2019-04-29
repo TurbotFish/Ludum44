@@ -20,7 +20,7 @@ public class PlayZone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (progressing && transform.localScale.x > 0)
+        if (progressing && transform.localScale.x > 0.2f)
         {
             transform.localScale -= new Vector3(reductionSpeed * Time.deltaTime, reductionSpeed * Time.deltaTime, 0);
         }
@@ -31,7 +31,7 @@ public class PlayZone : MonoBehaviour
         transform.localScale = new Vector3(baseScale, baseScale, 1);
         endCoordinates = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
         transform.position = new Vector3(endCoordinates.x, 1, endCoordinates.y);
-        progressing = false;
+        //progressing = false;
     }
 
     private void OnTriggerExit(Collider other)

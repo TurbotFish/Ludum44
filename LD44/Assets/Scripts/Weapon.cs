@@ -55,8 +55,8 @@ public class Weapon : MonoBehaviour
             if (!v.player.noPick)
             {
                 pickable = false;
-                v.player.PickWeapon(this.gameObject);
                 v.player.ExitVehicle(true);
+                v.player.PickWeapon(this.gameObject);
                 v.ResetVehicle();
 
                 audioSource.clip = pickUpSounds[Random.Range(0, pickUpSounds.Count)];
