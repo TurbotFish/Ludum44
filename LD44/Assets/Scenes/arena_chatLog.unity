@@ -16122,7 +16122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chatLogItem: {fileID: 8663608905792428980, guid: 7b34b8df18174418891488428106be41,
     type: 3}
-  spaceBetweenItems: -0.45
+  spaceBetweenItems: 0.45
   displayTime: 3.5
   displayTimes: []
   items: []

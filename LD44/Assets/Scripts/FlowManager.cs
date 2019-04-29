@@ -47,6 +47,9 @@ public class FlowManager : Singleton<FlowManager>
     public TextMeshPro killsText;
     public TextMeshPro deathsText;
 
+    [Header("Chat")]
+    public ChatLog chatLog;
+
     [Header("PlayerData")]
     public PlayerInfoDB db;
     public int money;
@@ -368,7 +371,7 @@ public class FlowManager : Singleton<FlowManager>
 
     public void SendChatMessage(string message)
     {
-        Debug.Log(message);
+        chatLog.AddChatItem(message);
     }
 
     public void UnlockItem(Transform item, GameObject itemGO, TextMeshPro text)
