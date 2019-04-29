@@ -97,7 +97,7 @@ PrefabInstance:
     - target: {fileID: 8195598914879555423, guid: 7ab2d396ff032c54ab396d49351679d6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.389
+      value: -0.43
       objectReference: {fileID: 0}
     - target: {fileID: 8195598914879555423, guid: 7ab2d396ff032c54ab396d49351679d6,
         type: 3}
@@ -172,7 +172,7 @@ PrefabInstance:
     - target: {fileID: 2972232985668823450, guid: 7ab2d396ff032c54ab396d49351679d6,
         type: 3}
       propertyPath: EmissionModule.rateOverDistance.scalar
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2972232985668823450, guid: 7ab2d396ff032c54ab396d49351679d6,
         type: 3}
@@ -293,6 +293,21 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972232985668823450, guid: 7ab2d396ff032c54ab396d49351679d6,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972232985668823450, guid: 7ab2d396ff032c54ab396d49351679d6,
+        type: 3}
+      propertyPath: scalingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972232985668823450, guid: 7ab2d396ff032c54ab396d49351679d6,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ab2d396ff032c54ab396d49351679d6, type: 3}
