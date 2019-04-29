@@ -17,10 +17,13 @@ public class Weapon : MonoBehaviour
     public RuntimeAnimatorController playerAnim;
     [HideInInspector]
     public PlayerInfo owner;
+    public List<AudioClip> pickUpSounds;
+    AudioSource audioSource;
+    public AudioClip firingSound;
 
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -42,6 +45,9 @@ public class Weapon : MonoBehaviour
         if (other.CompareTag("bonhomme") && pickable)
         {
             other.GetComponent<BonhommeController>().PickWeapon(this.gameObject);
+
+            audioSource.clip = pickUpSounds[Random.Range(0, pickUpSounds.Count)];
+            audioSource.Play();
         }
         else if (other.CompareTag("vehicle") && pickable)
         {
@@ -52,6 +58,9 @@ public class Weapon : MonoBehaviour
                 v.player.PickWeapon(this.gameObject);
                 v.player.ExitVehicle(true);
                 v.ResetVehicle();
+
+                audioSource.clip = pickUpSounds[Random.Range(0, pickUpSounds.Count)];
+                audioSource.Play();
             }
 
         }
@@ -125,5 +134,10 @@ public class Weapon : MonoBehaviour
     {
         yield return new WaitForSeconds(rateOfAction);
         canFire = true;
+        yield return new WaitForSeconds(Random.Range(0,0.3f));
+        audioSource.clip = firingSound;
+        audioSource.pitch = 1 + Random.Range(-0.2f, 0.2f);
+        audioSource.Play();
+
     }
 }

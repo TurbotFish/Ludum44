@@ -263,9 +263,7 @@ public class FlowManager : Singleton<FlowManager>
         yield return new WaitForSeconds(1);
         OpenDoors();
         yield return new WaitForSeconds(0.75f);
-        inGameUI.SetActive(true);
-        zone.gameObject.SetActive(true);
-        zone.Reset();
+
 
         if (audioSource.clip != musicBattle || audioSource.clip == musicBattle && !audioSource.isPlaying)
         {
@@ -278,6 +276,9 @@ public class FlowManager : Singleton<FlowManager>
         yield return new WaitForSeconds(1);
         StartCoroutine(GetComponent<CrowdSpawner>().InstantiateCrowd());
         yield return new WaitForSeconds(3);
+        inGameUI.SetActive(true);
+        zone.gameObject.SetActive(true);
+        zone.Reset();
         inMenu = false;
         CrowdController.lockControls = false;
         zone.progressing = true;

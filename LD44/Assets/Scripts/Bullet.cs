@@ -46,7 +46,7 @@ public class Bullet : MonoBehaviour
             }
             else
             {
-                FlowManager.Instance.SendChatMessage("<b>"+owner.playerName + " </b>shot<b> " + col.collider.GetComponent<PlayerInfo>().playerName+"</b>");
+                FlowManager.Instance.SendChatMessage("<b>"+owner.playerName + " </b>shot<b> " + b.playerInfo.playerName+"</b>");
                 b.Kill(transform.forward * bulletPower, true, true, false);
 
                 //FlowManager.Instance.RemovePlayer(b.playerInfo, true);

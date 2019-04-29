@@ -21,6 +21,7 @@ public class BonhommeController : MonoBehaviour
     public Transform head;
     public bool inVehicle;
     public ParticleSystem impactFX;
+    public List<AudioSource> impactSounds;
     public GameObject bloodFX;
 
     public RuntimeAnimatorController defaultAnimController;

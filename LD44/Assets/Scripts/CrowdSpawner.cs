@@ -75,8 +75,9 @@ public class CrowdSpawner : MonoBehaviour
 
                         FlowManager.Instance.AddPlayer(p.GetComponent<PlayerInfo>());
 
-                        p.GetComponent<BonhommeController>().impactFX.Play();
-
+                        BonhommeController b = p.GetComponent<BonhommeController>();
+                        b.impactFX.Play();
+                        StartCoroutine(PlayImpactSound(b));
                     }
 
                     //GameObject s = Instantiate(fakeShadow, hit.point + Vector3.up * 0.1f, Quaternion.Euler(90,0,0)) as GameObject;
@@ -97,6 +98,13 @@ public class CrowdSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         CameraShake.shakeDuration = 0.01f;
+
+    }
+
+    private IEnumerator PlayImpactSound(BonhommeController b)
+    {
+        yield return new WaitForSeconds(1f);
+        b.impactSounds[Random.Range(0, b.impactSounds.Count)].Play();
 
     }
 

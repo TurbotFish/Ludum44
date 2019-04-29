@@ -16,10 +16,11 @@ public class VehicleController : MonoBehaviour
     public GameObject explosion;
     public AudioSource klaxon;
     public RuntimeAnimatorController animController;
-
+    AudioSource engineSound;
 
     void Start()
     {
+        engineSound = GetComponent<AudioSource>();
         alive = true;
         rb = this.GetComponent<Rigidbody>();
 
@@ -30,7 +31,7 @@ public class VehicleController : MonoBehaviour
         if (CrowdController.firing && canKlaxon && playerIn)
         {
             canKlaxon = false;
-            StartCoroutine(Klaxon(Random.Range(0f, 0.5f)));
+            //StartCoroutine(Klaxon(Random.Range(0f, 0.5f)));
         }
         else if (!CrowdController.firing)
         {
@@ -49,7 +50,18 @@ public class VehicleController : MonoBehaviour
             rb.AddForce(movement);
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
             this.transform.Rotate(new Vector3(0, CrowdController.rotationInput * rotationSpeed * Mathf.Clamp01(horizontalVelocity.magnitude/ speedKillThreshold), 0));
-
+            if (CrowdController.moveInput >= 0.02f)
+            {
+                engineSound.Play();
+            }
+            else
+            {
+                engineSound.Stop();
+            }
+        }
+        else
+        {
+            engineSound.Stop();
         }
     }
 
