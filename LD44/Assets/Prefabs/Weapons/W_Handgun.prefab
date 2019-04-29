@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01557e36f86cb4bf19936602295ff857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickable: 1
+  pickable: 0
   type: 0
   bullet: {fileID: 8963459624203665490, guid: 5b66f332e740d4135b285dad525d18b6, type: 3}
   actionZone: {fileID: 0}

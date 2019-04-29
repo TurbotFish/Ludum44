@@ -13,7 +13,7 @@ public class KillZone : MonoBehaviour
             BonhommeController b = other.GetComponent<BonhommeController>();
             b.invincible = false;
             b.Kill(Vector3.zero, false, false, true);
-            FlowManager.Instance.SendChatMessage(b.playerInfo.playerName + " drowned...");
+            FlowManager.Instance.SendChatMessage("<b>" + b.playerInfo.playerName + " </b> drowned...");
             GameObject fx = Instantiate(waterFX, other.transform.position, Quaternion.identity) as GameObject;
             Destroy(fx, 4);
         }

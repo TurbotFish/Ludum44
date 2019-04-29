@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3025283489598586620}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.21, y: -21, z: 1.36}
-  m_LocalScale: {x: 15, y: 15, z: 1}
+  m_LocalScale: {x: 259.66418, y: 225.79495, z: 15.052997}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -57,4 +57,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 189928aecff80411a9358b17c9b0c88c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterFX: {fileID: 8771870928334735656, guid: 640d7bf9bce38f347a709594422b82a0, type: 3}
+  waterFX: {fileID: 8771870928334735656, guid: 9d306b2a992df0f47a7aeea6f86c2e81, type: 3}

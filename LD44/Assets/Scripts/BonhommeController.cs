@@ -38,11 +38,20 @@ public class BonhommeController : MonoBehaviour
     {
         if (CrowdController.firing)
         {
-            anim.SetTrigger("Shoot");
 
             if (weapon != null)
             {
                 weapon.FireWeapon(weaponFire);
+                if (weapon.canFire && !weapon.fired)
+                {
+                    anim.SetTrigger("Shoot");
+
+                }
+            }
+            else
+            {
+                anim.SetTrigger("Shoot");
+
             }
         }
     }
@@ -181,7 +190,7 @@ public class BonhommeController : MonoBehaviour
             if (this != null)
             {
                 Kill(Vector3.zero, false, false, false);
-                FlowManager.Instance.SendChatMessage(playerInfo.playerName + " died to the Zone");
+                FlowManager.Instance.SendChatMessage("<b>"+playerInfo.playerName + " </b>died to the Zone");
             }
         }
     }

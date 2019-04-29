@@ -39,14 +39,14 @@ public class Bullet : MonoBehaviour
             //PlayerInfo victim = col.collider.GetComponent<PlayerInfo>();
             if (owner == b.playerInfo)
             {
-                FlowManager.Instance.SendChatMessage(owner.name + " killed themselves...");
+                FlowManager.Instance.SendChatMessage("<b>"+ owner.playerName + "</b> killed themselves...");
                 b.Kill(transform.forward * bulletPower, true, false,false);
                 //FlowManager.Instance.RemovePlayer(b.playerInfo, false);
                 //FlowManager.Instance.deathCount++;
             }
             else
             {
-                FlowManager.Instance.SendChatMessage(owner.name + " shot " + col.collider.GetComponent<PlayerInfo>().name);
+                FlowManager.Instance.SendChatMessage("<b>"+owner.playerName + " </b>shot<b> " + col.collider.GetComponent<PlayerInfo>().playerName+"</b>");
                 b.Kill(transform.forward * bulletPower, true, true, false);
 
                 //FlowManager.Instance.RemovePlayer(b.playerInfo, true);

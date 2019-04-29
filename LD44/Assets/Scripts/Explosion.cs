@@ -34,12 +34,12 @@ public class Explosion : MonoBehaviour
                 PlayerInfo victim = hitCollider.GetComponent<PlayerInfo>();
                 if (owner == victim)
                 {
-                    FlowManager.Instance.SendChatMessage(owner.playerName + " killed themselves...");
+                    FlowManager.Instance.SendChatMessage("<b>"+owner.playerName + "</b> killed themselves...");
                     FlowManager.Instance.RemovePlayer(victim, false);
                 }
                 else if (owner != null)
                 {
-                    FlowManager.Instance.SendChatMessage(owner.playerName + " blew " + bc.playerInfo.playerName + " up");
+                    FlowManager.Instance.SendChatMessage("<b>" + owner.playerName + " </b> blew " + "<b>" + bc.playerInfo.playerName + " </b> up");
                     FlowManager.Instance.RemovePlayer(victim, true);
                     owner.kills++;
                     owner.totalKills++;

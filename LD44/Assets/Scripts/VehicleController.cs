@@ -121,7 +121,7 @@ public class VehicleController : MonoBehaviour
                 if (player != null)
                 {
                     b.Kill(rb.velocity, true, true, false);
-                    FlowManager.Instance.SendChatMessage(player.playerInfo.playerName + " ran " + b.playerInfo.playerName + " over");
+                    FlowManager.Instance.SendChatMessage("<b>" + player.playerInfo.playerName + " </b> ran " + "<b>" + b.playerInfo.playerName + "</b> over");
                     //FlowManager.Instance.RemovePlayer(victim, true);
                     player.playerInfo.kills++;
                     player.playerInfo.totalKills++;
@@ -132,7 +132,7 @@ public class VehicleController : MonoBehaviour
                 else
                 {
                     b.Kill(rb.velocity,false, false, false);
-                    FlowManager.Instance.SendChatMessage(victim.name + " killed themselves...");
+                    FlowManager.Instance.SendChatMessage("<b>" + victim.name + " </b> killed themselves...");
                     //FlowManager.Instance.RemovePlayer(victim, false);
                 }
 
