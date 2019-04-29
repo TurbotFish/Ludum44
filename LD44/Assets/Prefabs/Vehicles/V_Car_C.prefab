@@ -218,7 +218,7 @@ MonoBehaviour:
   horizontalVelocity: {x: 0, y: 0, z: 0}
   explosion: {fileID: 540961938444212608, guid: c5d1cd9a728f86542a964ae28c303497,
     type: 3}
-  klaxon: {fileID: 1278242682080626809}
+  klaxon: {fileID: 0}
   animController: {fileID: 9100000, guid: 3f2f44269b389a843bfa2f55abeb4885, type: 2}
 --- !u!114 &9062772061301648187
 MonoBehaviour:
