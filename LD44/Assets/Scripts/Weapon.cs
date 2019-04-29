@@ -50,7 +50,7 @@ public class Weapon : MonoBehaviour
             {
                 pickable = false;
                 v.player.PickWeapon(this.gameObject);
-                v.player.ExitVehicle();
+                v.player.ExitVehicle(true);
                 v.ResetVehicle();
             }
 

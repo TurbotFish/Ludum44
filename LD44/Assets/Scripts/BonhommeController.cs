@@ -21,6 +21,7 @@ public class BonhommeController : MonoBehaviour
     public Transform head;
     public bool inVehicle;
     public ParticleSystem impactFX;
+    public GameObject bloodFX;
 
     public RuntimeAnimatorController defaultAnimController;
 
@@ -65,7 +66,7 @@ public class BonhommeController : MonoBehaviour
         }
     }
 
-    public void Kill(Vector3 deathForce, bool shake, bool kill)
+    public void Kill(Vector3 deathForce, bool shake, bool kill, bool water)
     {
         if (!invincible)
         {
@@ -83,6 +84,11 @@ public class BonhommeController : MonoBehaviour
 
             PlayerInfo pi = GetComponent<PlayerInfo>();
             FlowManager.Instance.RemovePlayer(pi, kill);
+            if (!water)
+            {
+                GameObject fx = Instantiate(bloodFX, transform.position, Quaternion.identity) as GameObject;
+                Destroy(fx, 4);
+            }
         }
 
     }
@@ -136,10 +142,10 @@ public class BonhommeController : MonoBehaviour
 
     }
 
-    public void ExitVehicle()
+    public void ExitVehicle(bool godMode)
     {
-        Debug.Log("exit");
-        StartCoroutine(GodFrames(2f));
+        if (godMode)
+            StartCoroutine(GodFrames(2f));
         transform.SetParent(null);
         inVehicle = false;
         GetComponent<CapsuleCollider>().enabled = true;
@@ -173,7 +179,10 @@ public class BonhommeController : MonoBehaviour
         {
             invincible = false;
             if (this != null)
-                Kill(Vector3.zero, false, false);
+            {
+                Kill(Vector3.zero, false, false, false);
+                FlowManager.Instance.SendChatMessage(playerInfo.playerName + " died to the Zone");
+            }
         }
     }
 }

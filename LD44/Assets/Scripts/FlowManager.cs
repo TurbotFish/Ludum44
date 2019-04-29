@@ -267,7 +267,7 @@ public class FlowManager : Singleton<FlowManager>
         }
         if (playerSave.inVehicle == true)
         {
-            playerSave.ExitVehicle();
+            playerSave.ExitVehicle(true);
         }
         players.Clear();
         zone.progressing = false;
