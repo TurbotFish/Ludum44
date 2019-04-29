@@ -35,18 +35,21 @@ public class Bullet : MonoBehaviour
     {
         if (col.collider.CompareTag("bonhomme") && type != BulletType.Grenade)
         {
-            col.collider.GetComponent<BonhommeController>().Kill(transform.forward * bulletPower, true, true);
-            PlayerInfo victim = col.collider.GetComponent<PlayerInfo>();
-            if (owner == victim)
+            BonhommeController b = col.collider.GetComponent<BonhommeController>();
+            //PlayerInfo victim = col.collider.GetComponent<PlayerInfo>();
+            if (owner == b.playerInfo)
             {
-                FlowManager.Instance.SendChatMessage(owner.name + " killed themselves...");
-                FlowManager.Instance.RemovePlayer(victim, false);
-                FlowManager.Instance.deathCount++;
+                FlowManager.Instance.SendChatMessage("<b>"+ owner.playerName + "</b> killed themselves...");
+                b.Kill(transform.forward * bulletPower, true, false,false);
+                //FlowManager.Instance.RemovePlayer(b.playerInfo, false);
+                //FlowManager.Instance.deathCount++;
             }
             else
             {
-                FlowManager.Instance.SendChatMessage(owner.name + " shot " + col.collider.GetComponent<PlayerInfo>().name);
-                FlowManager.Instance.RemovePlayer(victim, true);
+                FlowManager.Instance.SendChatMessage("<b>"+owner.playerName + " </b>shot<b> " + col.collider.GetComponent<PlayerInfo>().playerName+"</b>");
+                b.Kill(transform.forward * bulletPower, true, true, false);
+
+                //FlowManager.Instance.RemovePlayer(b.playerInfo, true);
                 owner.kills++;
                 owner.totalKills++;
                 FlowManager.Instance.CheckKillStreak(owner);
@@ -65,7 +68,7 @@ public class Bullet : MonoBehaviour
             v.life -= bulletPower;
             if (v.life < 0)
             {
-                v.Kill(transform.forward * bulletPower, true);
+                v.Kill(transform.forward * bulletPower, true,false);
             }
             StartCoroutine(DestroyBullet(0));
         }
@@ -80,7 +83,6 @@ public class Bullet : MonoBehaviour
         yield return new WaitForSeconds(t);
         if ((type == BulletType.RPG || type == BulletType.Grenade) && !exploded)
         {
-            Debug.Log("EXPLOSION");
             Instantiate(explosion, transform.position, Quaternion.identity);
             exploded = true;
         }

@@ -53,12 +53,11 @@ public class VehicleController : MonoBehaviour
         }
     }
 
-    public void Kill(Vector3 deathForce, bool shake)
+    public void Kill(Vector3 deathForce, bool shake, bool water)
     {
         if (player != null)
         {
-            Debug.Log("exitKill");
-            player.ExitVehicle();
+            player.ExitVehicle(true);
         }
         alive = false;
         rb.constraints = RigidbodyConstraints.None;
@@ -68,10 +67,14 @@ public class VehicleController : MonoBehaviour
             CameraShake.shakeDuration = 0.5f;
         }
 
-        GameObject explo = Instantiate(explosion, transform.position, Quaternion.identity) as GameObject;
-        Destroy(explo, 4);
+        if (!water)
+        {
+            GameObject explo = Instantiate(explosion, transform.position, Quaternion.identity) as GameObject;
+            Destroy(explo, 4);
+        }
 
-        Destroy(this.gameObject, 5);
+
+        Destroy(this.gameObject, 0.1f);
         this.gameObject.tag = "Untagged";
 
     }
@@ -110,26 +113,27 @@ public class VehicleController : MonoBehaviour
             BonhommeController b = col.gameObject.GetComponent<BonhommeController>();
             if (!b.invincible)
             {
-                b.Kill(rb.velocity, true, true);
                 if (player != null)
                 {
                     StartCoroutine(player.NoPick(1));
                 }
-                PlayerInfo victim = col.collider.GetComponent<PlayerInfo>();
+                PlayerInfo victim = b.playerInfo;
                 if (player != null)
                 {
-
-                    FlowManager.Instance.SendChatMessage(player.playerInfo.name + " ran " + col.collider.GetComponent<PlayerInfo>().name + " over");
-                    FlowManager.Instance.RemovePlayer(victim, true);
+                    b.Kill(rb.velocity, true, true, false);
+                    FlowManager.Instance.SendChatMessage("<b>" + player.playerInfo.playerName + " </b> ran " + "<b>" + b.playerInfo.playerName + "</b> over");
+                    //FlowManager.Instance.RemovePlayer(victim, true);
                     player.playerInfo.kills++;
                     player.playerInfo.totalKills++;
                     FlowManager.Instance.CheckKillStreak(player.playerInfo);
 
+
                 }
                 else
                 {
-                    FlowManager.Instance.SendChatMessage(victim.name + " killed themselves...");
-                    FlowManager.Instance.RemovePlayer(victim, false);
+                    b.Kill(rb.velocity,false, false, false);
+                    FlowManager.Instance.SendChatMessage("<b>" + victim.name + " </b> killed themselves...");
+                    //FlowManager.Instance.RemovePlayer(victim, false);
                 }
 
             }

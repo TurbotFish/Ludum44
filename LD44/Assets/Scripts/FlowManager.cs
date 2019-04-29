@@ -47,6 +47,9 @@ public class FlowManager : Singleton<FlowManager>
     public TextMeshPro killsText;
     public TextMeshPro deathsText;
 
+    [Header("Chat")]
+    public ChatLog chatLog;
+
     [Header("PlayerData")]
     public PlayerInfoDB db;
     public int money;
@@ -264,10 +267,11 @@ public class FlowManager : Singleton<FlowManager>
         }
         if (playerSave.inVehicle == true)
         {
-            playerSave.ExitVehicle();
+            playerSave.ExitVehicle(true);
         }
         players.Clear();
         zone.progressing = false;
+        zone.gameObject.SetActive(false);
         inMenu = true;
         CrowdController.lockControls = true;
         yield return new WaitForSeconds(0.5f);
@@ -368,7 +372,7 @@ public class FlowManager : Singleton<FlowManager>
 
     public void SendChatMessage(string message)
     {
-        Debug.Log(message);
+        chatLog.AddChatItem(message);
     }
 
     public void UnlockItem(Transform item, GameObject itemGO, TextMeshPro text)
@@ -382,24 +386,24 @@ public class FlowManager : Singleton<FlowManager>
         if (unlockableVehicles.Count>0)
         {
             canLootVehicle = true;
-            Debug.Log("canlootV");
+            //Debug.Log("canlootV");
         }
         if (unlockableWeapons.Count > 0)
         {
             canLootWeapon = true;
-            Debug.Log("canlootW");
+            //Debug.Log("canlootW");
 
         }
         if (unlockableSkins.Count > 0)
         {
             canLootSkin = true;
-            Debug.Log("canlootS");
+            //Debug.Log("canlootS");
 
         }
         if (unlockableHairs.Count > 0)
         {
             canLootHair = true;
-            Debug.Log("canlootH");
+            //Debug.Log("canlootH");
 
         }
 
@@ -441,7 +445,7 @@ public class FlowManager : Singleton<FlowManager>
             itemGO = v;
             v.GetComponent<VehicleController>().enabled = false;
             v.GetComponent<Rigidbody>().isKinematic = true;
-            v.transform.localScale *= 0.6f;
+            v.transform.localScale *= 0.45f;
             ParticleSystem[] particles = v.GetComponentsInChildren<ParticleSystem>();
             foreach (ParticleSystem ps in particles)
             {
@@ -460,6 +464,9 @@ public class FlowManager : Singleton<FlowManager>
 
             GameObject w = Instantiate(unlockableWeapons[index], item.position, item.rotation, item) as GameObject;
             itemGO = w;
+            w.transform.localPosition += new Vector3(0, 0.5f, 0);
+            w.transform.GetChild(0).localEulerAngles += new Vector3(-90, 0, 0);
+
             w.GetComponent<Weapon>().enabled = false;
             text.text = w.GetComponent<AssetName>().asset;
 
@@ -473,6 +480,8 @@ public class FlowManager : Singleton<FlowManager>
 
             GameObject s = Instantiate(unlockableSkins[index], item.position, item.rotation, item) as GameObject;
             s.transform.eulerAngles += new Vector3(-90, 0, 0);
+            s.transform.localPosition += new Vector3(0, -0.75f, 0);
+
             itemGO = s;
             //s.GetComponent<VehicleController>().enabled = false;
             text.text = s.GetComponent<AssetName>().asset;

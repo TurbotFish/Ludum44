@@ -123,6 +123,7 @@ MonoBehaviour:
   head: {fileID: 7743973015787027161}
   inVehicle: 0
   impactFX: {fileID: 5915355969911738457}
+  bloodFX: {fileID: 280509565430519400, guid: 567cd9f493541c046a7a7b14560f9387, type: 3}
   defaultAnimController: {fileID: 9100000, guid: 78570777ce983d54db1377f0cd849ef3,
     type: 2}
 --- !u!114 &6337364734441671951
@@ -296,6 +297,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_FX_Landing
       objectReference: {fileID: 0}
+    - target: {fileID: 4475643638480696711, guid: 640d7bf9bce38f347a709594422b82a0,
+        type: 3}
+      propertyPath: startDelay.scalar
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4307219004279005557, guid: 640d7bf9bce38f347a709594422b82a0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -350,11 +356,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4475643638480696711, guid: 640d7bf9bce38f347a709594422b82a0,
-        type: 3}
-      propertyPath: startDelay.scalar
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 640d7bf9bce38f347a709594422b82a0, type: 3}

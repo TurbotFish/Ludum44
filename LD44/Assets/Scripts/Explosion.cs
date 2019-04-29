@@ -30,16 +30,16 @@ public class Explosion : MonoBehaviour
             if (hitCollider.CompareTag("bonhomme"))
             {
                 BonhommeController bc = hitCollider.GetComponent<BonhommeController>();
-                bc.Kill((bc.transform.position - (transform.position + col.center)).normalized * explosionForce, true, true);
+                bc.Kill((bc.transform.position - (transform.position + col.center)).normalized * explosionForce, true, true, false);
                 PlayerInfo victim = hitCollider.GetComponent<PlayerInfo>();
                 if (owner == victim)
                 {
-                    FlowManager.Instance.SendChatMessage(owner.name + " killed themselves...");
+                    FlowManager.Instance.SendChatMessage("<b>"+owner.playerName + "</b> killed themselves...");
                     FlowManager.Instance.RemovePlayer(victim, false);
                 }
                 else if (owner != null)
                 {
-                    FlowManager.Instance.SendChatMessage(owner.name + " blew " + hitCollider.GetComponent<PlayerInfo>().name + " up");
+                    FlowManager.Instance.SendChatMessage("<b>" + owner.playerName + " </b> blew " + "<b>" + bc.playerInfo.playerName + " </b> up");
                     FlowManager.Instance.RemovePlayer(victim, true);
                     owner.kills++;
                     owner.totalKills++;
@@ -57,7 +57,7 @@ public class Explosion : MonoBehaviour
                 vc.life -= explosionDamage;
                 if (vc.life < 0)
                 {
-                    vc.Kill((vc.transform.position - (transform.position + col.center)) * explosionForce, true);
+                    vc.Kill((vc.transform.position - (transform.position + col.center)) * explosionForce, true, false);
                 }
             }
         }

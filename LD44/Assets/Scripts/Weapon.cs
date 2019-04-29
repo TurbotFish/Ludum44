@@ -50,7 +50,7 @@ public class Weapon : MonoBehaviour
             {
                 pickable = false;
                 v.player.PickWeapon(this.gameObject);
-                v.player.ExitVehicle();
+                v.player.ExitVehicle(true);
                 v.ResetVehicle();
             }
 
@@ -59,7 +59,7 @@ public class Weapon : MonoBehaviour
 
     public void FireWeapon(Transform origin)
     {
-        if (canFire && !fired)
+        /*if (canFire && !fired)
         {
             canFire = false;
             StartCoroutine(FireRate());
@@ -83,8 +83,42 @@ public class Weapon : MonoBehaviour
                 GameObject b = Instantiate(bullet, origin.position, origin.rotation) as GameObject;
                 b.GetComponent<Rigidbody>().AddForce((Vector3.up*0.5f + b.transform.forward.normalized) * 100);
             }
-        }
+        }*/
 
+        StartCoroutine(FireWithDelay(origin, 0.05f));
+
+    }
+
+    private IEnumerator FireWithDelay(Transform origin, float delay)
+    {
+        if (canFire && !fired)
+        {
+
+            canFire = false;
+            yield return new WaitForSeconds(delay);
+
+            StartCoroutine(FireRate());
+            if (!continuedShot)
+            {
+                fired = true;
+            }
+
+            if (type == WeaponType.Handgun || type == WeaponType.AssaultRifle || type == WeaponType.Sniper || type == WeaponType.RPG)
+            {
+                GameObject b = Instantiate(bullet, origin.position, origin.rotation) as GameObject;
+                b.GetComponent<Bullet>().owner = owner;
+            }
+            else if (type == WeaponType.Sword)
+            {
+                GameObject zone = Instantiate(actionZone, transform.position + transform.forward * (actionZone.GetComponent<SphereCollider>().radius + 0.5f), Quaternion.identity) as GameObject;
+                zone.GetComponent<Explosion>().owner = owner;
+            }
+            else if (type == WeaponType.Grenade)
+            {
+                GameObject b = Instantiate(bullet, origin.position, origin.rotation) as GameObject;
+                b.GetComponent<Rigidbody>().AddForce((Vector3.up * 0.5f + b.transform.forward.normalized) * 100);
+            }
+        }
     }
 
     private IEnumerator FireRate()

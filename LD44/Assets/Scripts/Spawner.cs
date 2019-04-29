@@ -14,6 +14,7 @@ public class Spawner : MonoBehaviour
         {
             int i = Random.Range(0, FlowManager.Instance.availableWeapons.Count);
             GameObject go = Instantiate(FlowManager.Instance.availableWeapons[i], transform.position, transform.rotation) as GameObject;
+            go.GetComponent<Weapon>().pickable = true;
             FlowManager.Instance.mapItems.Add(go);
         }
 
