@@ -15,6 +15,7 @@ public class KillZone : MonoBehaviour
             b.Kill(Vector3.zero, false, false, true);
             FlowManager.Instance.SendChatMessage("<b>" + b.playerInfo.playerName + " </b> drowned...");
             GameObject fx = Instantiate(waterFX, other.transform.position, Quaternion.identity) as GameObject;
+            fx.transform.eulerAngles = new Vector3(-90f, 0, 0);
             Destroy(fx, 4);
         }
 
@@ -24,6 +25,7 @@ public class KillZone : MonoBehaviour
             v.player.ExitVehicle(false);
             v.Kill(Vector3.zero, false,true);
             GameObject fx = Instantiate(waterFX, other.transform.position, Quaternion.identity) as GameObject;
+            fx.transform.eulerAngles = new Vector3(-90f, 0, 0);
             fx.transform.localScale *= 1.5f;
             Destroy(fx, 4);
         }

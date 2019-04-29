@@ -28,8 +28,9 @@ public class FlowManager : Singleton<FlowManager>
     [Header("EndBattle")]
     public Animator endBattle;
     public Transform playerAvatar;
-    public TextMeshPro endPlayerText, endKillsText, endDeathsText, endKillStreakText;
-
+    public TextMeshPro endPlayerText, playerWonText, endKillsText, endDeathsText, endKillStreakText, goldEarnedText, killsNumberText, killStreakNumberText, killsNumberGoldText, killStreakNumberGoldText, totalGoldText;
+    public GameObject endBattleCoin;
+    
     [Header("Menu")]
     public Transform playerAvatarMenu;
     public TextMeshPro moneyText;
@@ -49,9 +50,10 @@ public class FlowManager : Singleton<FlowManager>
     public PlayZone zone;
 
     [Header("InGameUI")]
+    public GameObject inGameUI;
     public TextMeshPro topPlayerText;
-    public TextMeshPro killsText;
-    public TextMeshPro deathsText;
+    public TextMeshPro goldText;
+    public TextMeshPro remainingPlayerText;
 
     [Header("Chat")]
     public ChatLog chatLog;
@@ -129,6 +131,10 @@ public class FlowManager : Singleton<FlowManager>
         itemA.transform.Rotate(0, objectsRotationSpeed, 0);
         itemB.transform.Rotate(0, objectsRotationSpeed, 0);
         itemC.transform.Rotate(0, objectsRotationSpeed, 0);
+
+        goldText.text = "earned:  <b>" + (killCount+ killStreak).ToString()+ "</b>";
+        remainingPlayerText.text = "Remaining players:  <b>"+players.Count.ToString() + "</b>";
+        topPlayerText.text = "Top killstreak: <b>" + topPlayerName + "</b> with <b>" + killStreak.ToString() + "</b> kills";
     }
 
     public void SpawnItems()
@@ -191,6 +197,8 @@ public class FlowManager : Singleton<FlowManager>
         killCount = 0;
         deathCount = 0;
         killStreak = 0;
+        topPlayerName = "no one";
+
     }
 
     public void ClickTransition(ButtonScript.Transition transition)
@@ -247,14 +255,17 @@ public class FlowManager : Singleton<FlowManager>
         CloseDoors();
         yield return new WaitForSeconds(1);
         mouseController.StartZoom();
-        zone.gameObject.SetActive(true);
-        zone.Reset();
+
         SpawnItems();
         ResetPlayerData();
         cam.position = camGamePos.position;
         cam.rotation = camGamePos.rotation;
         yield return new WaitForSeconds(1);
         OpenDoors();
+        yield return new WaitForSeconds(0.75f);
+        inGameUI.SetActive(true);
+        zone.gameObject.SetActive(true);
+        zone.Reset();
 
         if (audioSource.clip != musicBattle || audioSource.clip == musicBattle && !audioSource.isPlaying)
         {
@@ -275,6 +286,7 @@ public class FlowManager : Singleton<FlowManager>
 
     private IEnumerator EndBattle()
     {
+        inGameUI.SetActive(false);
         playerSave = players[0].GetComponent<BonhommeController>();
         if (playerSave.weapon != null)
         {
@@ -292,21 +304,44 @@ public class FlowManager : Singleton<FlowManager>
         CrowdController.lockControls = true;
         yield return new WaitForSeconds(0.5f);
         endBattle.SetBool("on", true);
+        audioSource.volume = musicVolume * 0.50f;
 
         playerSave.transform.position = playerAvatar.position;
         playerSave.transform.rotation = playerAvatar.rotation;
         playerSave.transform.SetParent(playerAvatar);
         playerSave.GetComponent<Rigidbody>().isKinematic = true;
 
+        yield return new WaitForSeconds(0.75f);
+        playerWonText.gameObject.SetActive(true);
+        playerWonText.text = "<b>"+playerSave.playerInfo.playerName+"</b> won the Battle!";
         endPlayerText.text = playerSave.playerInfo.playerName;
-        endKillsText.text = killCount.ToString() + " players killed";
+        yield return new WaitForSeconds(0.2f);
+        endKillsText.gameObject.SetActive(true);
+        endKillsText.text = killCount.ToString() + " players were killed";
+        yield return new WaitForSeconds(0.2f);
+        endDeathsText.gameObject.SetActive(true);
         endDeathsText.text = deathCount.ToString() + " died by themselves...";
-        endKillStreakText.text = "Top killstreak was " + killStreak.ToString() + " by " + topPlayerName;
+        yield return new WaitForSeconds(0.2f);
+        endKillStreakText.gameObject.SetActive(true);
+        endKillStreakText.text = "Top killstreak was <b>" + topPlayerName + "</b> with <b>" + killStreak.ToString() + "</b> kills";
+        yield return new WaitForSeconds(0.2f);
+        goldEarnedText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        killsNumberText.gameObject.SetActive(true);
+        killsNumberGoldText.gameObject.SetActive(true);
+        killsNumberGoldText.text = killCount.ToString();
+        yield return new WaitForSeconds(0.2f);
+        killStreakNumberText.gameObject.SetActive(true);
+        killStreakNumberGoldText.gameObject.SetActive(true);
+        killStreakNumberGoldText.text = killStreak.ToString();
+        yield return new WaitForSeconds(0.2f);
+        endBattleCoin.SetActive(true);
+        totalGoldText.gameObject.SetActive(true);
+        totalGoldText.text = (killCount + killStreak).ToString();
 
-        money += killCount;
+        money += killCount+killStreak;
         moneyText.text = money.ToString();
 
-        audioSource.volume = musicVolume * 0.50f;
     }
 
     private IEnumerator GoToMenu()
@@ -316,6 +351,19 @@ public class FlowManager : Singleton<FlowManager>
         CrowdController.lockControls = true;
         CloseDoors();
         yield return new WaitForSeconds(1);
+
+        playerWonText.gameObject.SetActive(false);
+        endKillsText.gameObject.SetActive(false);
+        endDeathsText.gameObject.SetActive(false);
+        endKillStreakText.gameObject.SetActive(false);
+        killsNumberText.gameObject.SetActive(false);
+        killsNumberGoldText.gameObject.SetActive(false);
+        killStreakNumberText.gameObject.SetActive(false);
+        killStreakNumberGoldText.gameObject.SetActive(false);
+        endBattleCoin.SetActive(false);
+        goldEarnedText.gameObject.SetActive(false);
+        totalGoldText.gameObject.SetActive(false);
+
         zone.gameObject.SetActive(false);
         endBattle.SetBool("on", false);
         cam.position = camMenuPos.position;
@@ -377,7 +425,7 @@ public class FlowManager : Singleton<FlowManager>
             UnlockItem(itemC, itemCGO, itemCText);
             menuAnim.SetTrigger("objects");
 
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(3);
             canPass = true;
         }
         else
