@@ -1659,11 +1659,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3470651838439148176}
     m_Modifications:
-    - target: {fileID: 481742360106872334, guid: 39706289d4ae144bf922e88f6881d046,
-        type: 3}
-      propertyPath: m_Name
-      value: P_Button (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 481742360106872333, guid: 39706289d4ae144bf922e88f6881d046,
         type: 3}
       propertyPath: m_RootOrder
@@ -1714,10 +1709,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -10
       objectReference: {fileID: 0}
-    - target: {fileID: 6355049780001142283, guid: 39706289d4ae144bf922e88f6881d046,
+    - target: {fileID: 481742360106872334, guid: 39706289d4ae144bf922e88f6881d046,
         type: 3}
-      propertyPath: transition
-      value: 2
+      propertyPath: m_Name
+      value: P_Button (1)
       objectReference: {fileID: 0}
     - target: {fileID: 481742359725984443, guid: 39706289d4ae144bf922e88f6881d046,
         type: 3}
@@ -1744,6 +1739,11 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6355049780001142283, guid: 39706289d4ae144bf922e88f6881d046,
+        type: 3}
+      propertyPath: transition
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39706289d4ae144bf922e88f6881d046, type: 3}
 --- !u!4 &1068487888581958604 stripped
@@ -1759,11 +1759,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3470651838439148176}
     m_Modifications:
-    - target: {fileID: 481742360106872334, guid: 39706289d4ae144bf922e88f6881d046,
-        type: 3}
-      propertyPath: m_Name
-      value: P_Button (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 481742360106872333, guid: 39706289d4ae144bf922e88f6881d046,
         type: 3}
       propertyPath: m_RootOrder
@@ -1814,10 +1809,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 6355049780001142283, guid: 39706289d4ae144bf922e88f6881d046,
+    - target: {fileID: 481742360106872334, guid: 39706289d4ae144bf922e88f6881d046,
         type: 3}
-      propertyPath: transition
-      value: 3
+      propertyPath: m_Name
+      value: P_Button (2)
       objectReference: {fileID: 0}
     - target: {fileID: 481742359725984443, guid: 39706289d4ae144bf922e88f6881d046,
         type: 3}
@@ -1843,6 +1838,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355049780001142283, guid: 39706289d4ae144bf922e88f6881d046,
+        type: 3}
+      propertyPath: transition
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39706289d4ae144bf922e88f6881d046, type: 3}
