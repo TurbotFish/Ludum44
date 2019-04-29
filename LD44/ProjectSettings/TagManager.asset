@@ -10,6 +10,7 @@ TagManager:
   - vehicle
   - goButton
   - zone
+  - Menu
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Ground
   - NoCollision
   - Decors
-  - 
+  - Menu
   - 
   - 
   - 
