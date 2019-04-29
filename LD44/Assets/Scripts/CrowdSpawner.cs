@@ -8,7 +8,8 @@ public class CrowdSpawner : MonoBehaviour
     public float raycastHeight;
     public  float minX,maxX, minY, maxY;
     public int numberOfPlayers;
-
+    [Range(0,1)]
+    public float chanceToHaveHat;
     public GameObject plane, fakeShadow;
     //public FlowManager flowManager;
 
@@ -33,8 +34,10 @@ public class CrowdSpawner : MonoBehaviour
                 {
                     if (i==0)
                     {
-                        GameObject p = Instantiate(FlowManager.Instance.playerSave.gameObject, hit.point + Vector3.up * 100f, Quaternion.identity) as GameObject;
-                        Destroy(FlowManager.Instance.playerSave.gameObject);
+                        //GameObject p = Instantiate(FlowManager.Instance.playerSave.gameObject, hit.point + Vector3.up * 100f, Quaternion.identity) as GameObject;
+                        //Destroy(FlowManager.Instance.playerSave.gameObject);
+                        GameObject p = FlowManager.Instance.playerSave.gameObject;
+                        p.transform.position = hit.point + Vector3.up * 100f;
                         p.transform.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
                         p.GetComponent<Rigidbody>().velocity += new Vector3(0, -100f, 0);
                         p.GetComponent<Rigidbody>().isKinematic = false;
@@ -56,6 +59,17 @@ public class CrowdSpawner : MonoBehaviour
                         {
                             mesh.material = skin;
                         }
+
+                        float chance = Random.Range(0f, 1f);
+                        if (chance < chanceToHaveHat*FlowManager.Instance.availableHairs.Count)
+                        {
+                            GameObject hat = Instantiate(FlowManager.Instance.availableHairs[Random.Range(0, FlowManager.Instance.availableHairs.Count)], Vector3.zero, Quaternion.identity) as GameObject;
+                            hat.transform.SetParent(p.GetComponent<BonhommeController>().head);
+                            hat.transform.localPosition = Vector3.zero;
+                            hat.transform.localEulerAngles = Vector3.zero;
+
+                        }
+
                         p.GetComponent<PlayerInfo>().playerName = FlowManager.Instance.names[Random.Range(0, FlowManager.Instance.names.Count - 1)];
                         p.GetComponent<PlayerInfo>().Reset();
 

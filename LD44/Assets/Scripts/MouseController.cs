@@ -8,13 +8,13 @@ public class MouseController : MonoBehaviour
     public float scrollSpeed;
     public float zoomSpeed;
     public float maxZoom;
+    public float startZoom;
     public Transform cam;
     public float minX, maxX, minY, maxY;
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartZoom()
     {
-        
+        cam.Translate(Vector3.forward * startZoom, Space.World);
     }
 
     // Update is called once per frame

@@ -11,6 +11,11 @@ public class FlowManager : Singleton<FlowManager>
     public Transform camTutoPos;
     public Transform cam;
 
+    [Header("Musics and Audio")]
+    public float musicVolume;
+    public AudioSource audioSource;
+    public AudioClip musicBattle;
+    public AudioClip musicMenu;
 
     [Header("Save")]
     public BonhommeController playerSave;
@@ -18,6 +23,7 @@ public class FlowManager : Singleton<FlowManager>
 
     [Header("Transition")]
     public Animator doorsAnim;
+    public MouseController mouseController;
 
     [Header("EndBattle")]
     public Animator endBattle;
@@ -155,6 +161,7 @@ public class FlowManager : Singleton<FlowManager>
         players.Add(p);
         playerCount++;
     }
+
     public void RemovePlayer(PlayerInfo p, bool kill)
     {
         if (players.Contains(p))
@@ -225,7 +232,6 @@ public class FlowManager : Singleton<FlowManager>
         doorsAnim.SetBool("close", false);
     }
 
-
     private IEnumerator GoToBattle()
     {
         foreach(GameObject go in mapItems)
@@ -240,6 +246,7 @@ public class FlowManager : Singleton<FlowManager>
         CrowdController.lockControls = true;
         CloseDoors();
         yield return new WaitForSeconds(1);
+        mouseController.StartZoom();
         zone.gameObject.SetActive(true);
         zone.Reset();
         SpawnItems();
@@ -248,6 +255,15 @@ public class FlowManager : Singleton<FlowManager>
         cam.rotation = camGamePos.rotation;
         yield return new WaitForSeconds(1);
         OpenDoors();
+
+        if (audioSource.clip != musicBattle || audioSource.clip == musicBattle && !audioSource.isPlaying)
+        {
+            audioSource.volume = musicVolume;
+            audioSource.Stop();
+            audioSource.clip = musicBattle;
+            audioSource.Play();
+        }
+
         yield return new WaitForSeconds(1);
         StartCoroutine(GetComponent<CrowdSpawner>().InstantiateCrowd());
         yield return new WaitForSeconds(3);
@@ -289,6 +305,8 @@ public class FlowManager : Singleton<FlowManager>
 
         money += killCount;
         moneyText.text = money.ToString();
+
+        audioSource.volume = musicVolume * 0.50f;
     }
 
     private IEnumerator GoToMenu()
@@ -310,6 +328,15 @@ public class FlowManager : Singleton<FlowManager>
         playerSave.transform.SetParent(playerAvatarMenu);
         playerSave.GetComponent<Rigidbody>().isKinematic = true;
 
+        if (audioSource.clip != musicMenu || audioSource.clip == musicMenu && !audioSource.isPlaying)
+        {
+            audioSource.volume = musicVolume;
+            audioSource.Stop();
+            audioSource.clip = musicMenu;
+            audioSource.Play();
+        }
+
+
     }
 
     private IEnumerator GoToTuto()
@@ -324,6 +351,11 @@ public class FlowManager : Singleton<FlowManager>
 
         yield return new WaitForSeconds(1);
         OpenDoors();
+
+        audioSource.volume = musicVolume;
+        audioSource.Stop();
+        audioSource.clip = musicMenu;
+        audioSource.Play();
 
     }
 
