@@ -93,7 +93,7 @@ public class Weapon : MonoBehaviour
     {
         if (canFire && !fired)
         {
-
+            owner.GetComponent<BonhommeController>().anim.SetTrigger("Shoot");
             canFire = false;
             yield return new WaitForSeconds(delay);
 
@@ -110,7 +110,7 @@ public class Weapon : MonoBehaviour
             }
             else if (type == WeaponType.Sword)
             {
-                GameObject zone = Instantiate(actionZone, transform.position + transform.forward * (actionZone.GetComponent<SphereCollider>().radius + 0.5f), Quaternion.identity) as GameObject;
+                GameObject zone = Instantiate(actionZone, owner.transform.position + owner.transform.forward * (actionZone.GetComponent<SphereCollider>().radius + 1f), Quaternion.identity) as GameObject;
                 zone.GetComponent<Explosion>().owner = owner;
             }
             else if (type == WeaponType.Grenade)
