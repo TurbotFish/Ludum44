@@ -91,4 +91,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd98b5ca7a3dd4dc0be43fa3ebc92862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asset: Hat
+  asset: Strawhat

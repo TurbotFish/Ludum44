@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd98b5ca7a3dd4dc0be43fa3ebc92862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asset: asset name
+  asset: Ice Truck
 --- !u!65 &1820443261972983435
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -283,11 +283,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6746990453915148032}
     m_Modifications:
-    - target: {fileID: 8470903718140278112, guid: e23c588b19aae874782b1f57f5b071ec,
-        type: 3}
-      propertyPath: m_Name
-      value: P_Vehicle_Icetruck_A
-      objectReference: {fileID: 0}
     - target: {fileID: 4888072274564843379, guid: e23c588b19aae874782b1f57f5b071ec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -342,6 +337,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470903718140278112, guid: e23c588b19aae874782b1f57f5b071ec,
+        type: 3}
+      propertyPath: m_Name
+      value: P_Vehicle_Icetruck_A
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e23c588b19aae874782b1f57f5b071ec, type: 3}

@@ -58,7 +58,6 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 80603809d5592d24896889dd2e909d65, type: 2}
   - {fileID: 2100000, guid: 74a8e05d67bf0b642b84e0b576301b2c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -91,4 +90,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd98b5ca7a3dd4dc0be43fa3ebc92862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asset: Hat
+  asset: Halo

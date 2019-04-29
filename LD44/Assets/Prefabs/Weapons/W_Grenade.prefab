@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd98b5ca7a3dd4dc0be43fa3ebc92862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asset: asset name
+  asset: Grenade
 --- !u!1001 &8817704342476819667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89,11 +89,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3694832771066353112}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: e7a7d8bac33869c4e93efe7b6e9ae6ba,
-        type: 3}
-      propertyPath: m_Name
-      value: M_Grenade
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: e7a7d8bac33869c4e93efe7b6e9ae6ba,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -148,6 +143,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: e7a7d8bac33869c4e93efe7b6e9ae6ba,
+        type: 3}
+      propertyPath: m_Name
+      value: M_Grenade
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: e7a7d8bac33869c4e93efe7b6e9ae6ba,
         type: 3}
