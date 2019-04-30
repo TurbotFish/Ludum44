@@ -17,6 +17,7 @@ public class VehicleController : MonoBehaviour
     public AudioSource klaxon;
     public RuntimeAnimatorController animController;
     AudioSource engineSound;
+    public bool inZone;
 
     void Start()
     {
@@ -158,5 +159,25 @@ public class VehicleController : MonoBehaviour
     {
         playerIn = false;
         player = null;
+    }
+
+    public IEnumerator InZone(float t)
+    {
+        yield return new WaitForSeconds(t);
+        if (inZone)
+        {
+            //invincible = false;
+            if (this != null)
+            {
+                BonhommeController p = player;
+                player.ExitVehicle(false);
+                Kill(Vector3.zero, false, false);
+                //p.Kill(Vector3.zero, false, false, false);
+                p.invincible = false;
+                p.inZone = true;
+                StartCoroutine(p.InZone(0));
+                //FlowManager.Instance.SendChatMessage("<b>" + p.playerInfo.playerName + " </b>died to the Zone");
+            }
+        }
     }
 }

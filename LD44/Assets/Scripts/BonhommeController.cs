@@ -92,8 +92,8 @@ public class BonhommeController : MonoBehaviour
             Destroy(this.gameObject, 0.1f);
             this.gameObject.tag = "Untagged";
 
-            PlayerInfo pi = GetComponent<PlayerInfo>();
-            FlowManager.Instance.RemovePlayer(pi, kill);
+            //PlayerInfo pi = GetComponent<PlayerInfo>();
+            FlowManager.Instance.RemovePlayer(playerInfo, kill);
             if (!water)
             {
                 GameObject fx = Instantiate(bloodFX, transform.position, Quaternion.identity) as GameObject;
@@ -107,7 +107,7 @@ public class BonhommeController : MonoBehaviour
     {
         if (!noPick)
         {
-            Debug.Log("pick");
+            //Debug.Log("pick");
 
             DropWeapon();
             w.transform.SetParent(weaponHold);
@@ -125,7 +125,7 @@ public class BonhommeController : MonoBehaviour
 
     public void DropWeapon()
     {
-        Debug.Log("drop");
+        //Debug.Log("drop");
         if (weaponGO != null)
         {
             weaponGO.transform.SetParent(null);
@@ -139,7 +139,7 @@ public class BonhommeController : MonoBehaviour
 
     public void EnterVehicle(VehicleController vhc)
     {
-        Debug.Log("enter");
+        //Debug.Log("enter");
         if (!noPick)
         {
             StartCoroutine(NoPick(1));

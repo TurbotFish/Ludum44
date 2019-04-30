@@ -198,6 +198,10 @@ public class FlowManager : Singleton<FlowManager>
         deathCount = 0;
         killStreak = 0;
         topPlayerName = "no one";
+        if (playerSave != null)
+        {
+            playerSave.playerInfo.Reset();
+        }
 
     }
 
@@ -282,7 +286,7 @@ public class FlowManager : Singleton<FlowManager>
         inMenu = false;
         CrowdController.lockControls = false;
         zone.progressing = true;
-        Debug.Log(zone.progressing + "HELLO");
+        //Debug.Log(zone.progressing + "HELLO");
     }
 
     private IEnumerator EndBattle()
@@ -370,12 +374,15 @@ public class FlowManager : Singleton<FlowManager>
         cam.position = camMenuPos.position;
         cam.rotation = camMenuPos.rotation;
         Camera.main.transform.localPosition = Vector3.zero;
-        yield return new WaitForSeconds(1);
-        OpenDoors();
+
         playerSave.transform.position = playerAvatarMenu.position;
         playerSave.transform.rotation = playerAvatarMenu.rotation;
         playerSave.transform.SetParent(playerAvatarMenu);
         playerSave.GetComponent<Rigidbody>().isKinematic = true;
+
+        yield return new WaitForSeconds(1);
+        OpenDoors();
+
 
         if (audioSource.clip != musicMenu || audioSource.clip == musicMenu && !audioSource.isPlaying)
         {

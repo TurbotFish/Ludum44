@@ -10,6 +10,7 @@ public class PlayZone : MonoBehaviour
     public float minX,maxX,minY,maxY;
     public Vector2 endCoordinates;
     public bool progressing;
+    public float endSize;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,7 @@ public class PlayZone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (progressing && transform.localScale.x > 0.2f)
+        if (progressing && transform.localScale.x > endSize)
         {
             transform.localScale -= new Vector3(reductionSpeed * Time.deltaTime, reductionSpeed * Time.deltaTime, 0);
         }
@@ -39,11 +40,19 @@ public class PlayZone : MonoBehaviour
         if (other.CompareTag("bonhomme"))
         {
             BonhommeController b = other.GetComponent<BonhommeController>();
+            b.invincible = false;
             b.inZone = true;
             StartCoroutine(b.InZone(timeBeforeDeath));
         }
+        if (other.CompareTag("vehicle"))
+        {
+            VehicleController v = other.GetComponent<VehicleController>();
+            v.inZone = true;
+            StartCoroutine(v.InZone(timeBeforeDeath));
+        }
 
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -52,6 +61,12 @@ public class PlayZone : MonoBehaviour
             BonhommeController b = other.GetComponent<BonhommeController>();
             b.inZone = false;
             StopCoroutine(b.InZone(timeBeforeDeath));
+        }
+        if (other.CompareTag("vehicle"))
+        {
+            VehicleController v = other.GetComponent<VehicleController>();
+            v.inZone = false;
+            StopCoroutine(v.InZone(timeBeforeDeath));
         }
 
     }
