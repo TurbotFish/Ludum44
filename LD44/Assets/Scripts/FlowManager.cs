@@ -623,9 +623,15 @@ public class FlowManager : Singleton<FlowManager>
             if (players[i].kills>ks)
             {
                 topPlayerAlive = players[i];
+                ks = topPlayerAlive.kills;
             }
+            else if (ks== 0)
+            {
+                topPlayerAlive = players[Random.Range(0, players.Count)];
+            }
+
         }
-        
+
         /*if (topPlayerAlive!= null)
         {
             crown.transform.SetParent(topPlayerAlive.transform);

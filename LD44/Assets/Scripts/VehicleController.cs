@@ -169,13 +169,22 @@ public class VehicleController : MonoBehaviour
             //invincible = false;
             if (this != null)
             {
-                BonhommeController p = player;
-                player.ExitVehicle(false);
-                Kill(Vector3.zero, false, false);
+                if (player != null)
+                {
+                    BonhommeController p = player;
+                    player.ExitVehicle(false);
+                    Kill(Vector3.zero, false, false);
+                    p.invincible = false;
+                    p.inZone = true;
+                    StartCoroutine(p.InZone(0));
+                }
+                else
+                {
+                    Kill(Vector3.zero, false, false);
+
+                }
                 //p.Kill(Vector3.zero, false, false, false);
-                p.invincible = false;
-                p.inZone = true;
-                StartCoroutine(p.InZone(0));
+
                 //FlowManager.Instance.SendChatMessage("<b>" + p.playerInfo.playerName + " </b>died to the Zone");
             }
         }
