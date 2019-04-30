@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/BATTLE_ROYALE.unity
+    guid: b3e771ae75f7b4013852f06c96bbc05f
   m_configObjects: {}
