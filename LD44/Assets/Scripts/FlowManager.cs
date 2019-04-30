@@ -135,6 +135,12 @@ public class FlowManager : Singleton<FlowManager>
         goldText.text = "earned:  <b>" + (killCount+ killStreak).ToString()+ "</b>";
         remainingPlayerText.text = "Remaining players:  <b>"+players.Count.ToString() + "</b>";
         topPlayerText.text = "Top killstreak: <b>" + topPlayerName + "</b> with <b>" + killStreak.ToString() + "</b> kills";
+
+        if (topPlayerAlive != null)
+        {
+            crown.transform.position = topPlayerAlive.transform.position + new Vector3(0, 2.1f, 0);
+            //crown.transform.localPosition = new Vector3(0, 2.1f, 0);
+        }
     }
 
     public void SpawnItems()
@@ -620,11 +626,11 @@ public class FlowManager : Singleton<FlowManager>
             }
         }
         
-        if (topPlayerAlive!= null)
+        /*if (topPlayerAlive!= null)
         {
             crown.transform.SetParent(topPlayerAlive.transform);
             crown.transform.localPosition = new Vector3(0, 2.1f, 0);
-        }
+        }*/
 
 
     }
